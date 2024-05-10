@@ -5,7 +5,7 @@
     use Model\UtenteRepository;
 
     function page_refresh(){
-        echo '<meta http-equiv=\'refresh\' content=\'0\'>';
+        echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
         exit;
     }
     $template = new League\Plates\Engine('templates', 'tpl');
@@ -18,6 +18,11 @@
     }
 
     if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'logout'){
+            Authenticator::logout();
+            page_refresh();
+            exit(0);
+        }
         if ($_GET['action'] == 'registrazione'){
             echo $template->render('registrazione');
             exit(0);
