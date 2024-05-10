@@ -7,14 +7,16 @@
         echo '<meta http-equiv=\'refresh\' content=\'0\'>';
         exit;
     }
+    $template = new League\Plates\Engine('templates', 'tpl');
 
     $user = Authenticator::getUser();
 
-    if ($user != null){
-        echo 'ciao';
+    if ($user == null){
+        echo $template->render('login');
+        exit(0);
     }
 
-    $template = new League\Plates\Engine('templates', 'tpl');
+
     echo $template->render('index');
 
 
