@@ -20,4 +20,15 @@ class UtenteRepository{
             return null;
         return $row;
     }
+
+    public static function userRegistration(string $username, string $password):void{
+        $pdo = Connection::getInstance();
+        $sql = 'INSERT INTO utente (username, password, idRuolo) VALUES (:username, :password, 2)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+                'username' => $username,
+                'password' => password_hash($password, PASSWORD_DEFAULT)
+            ]
+        );
+    }
 }
