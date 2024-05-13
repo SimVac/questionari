@@ -7,7 +7,7 @@ use Util\Connection;
 class UtenteRepository{
     public static function userAuthentication(string $username, string $password):array|null{
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM utente WHERE username=:username';
+        $sql = 'SELECT * FROM utente INNER JOIN ruolo ON utente.idRuolo = ruolo.id WHERE username=:username';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
                 'username' => $username
