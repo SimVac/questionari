@@ -1,5 +1,6 @@
 <?php
     require 'vendor/autoload.php';
+
     require_once 'conf/config.php';
     use Util\Authenticator;
     use Model\UtenteRepository;
@@ -8,6 +9,7 @@
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
         exit;
     }
+
     $template = new League\Plates\Engine('templates', 'tpl');
 
     $user = Authenticator::getUser();
@@ -36,8 +38,7 @@
         echo $template->render('login');
         exit(0);
     }
-
-
+    
     echo $template->render('index');
 
 
