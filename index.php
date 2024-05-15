@@ -33,7 +33,7 @@
 
     // POST section
     if (isset($_POST['registrazione'])){
-        $username = $_POST['username'];
+        $username = $_POST['mail'];
         $password = $_POST['password'];
         UtenteRepository::userRegistration($username, $password);
         echo $template->render('login');
