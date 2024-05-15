@@ -1,5 +1,6 @@
 <?php
     require 'vendor/autoload.php';
+
     require_once 'conf/config.php';
     use Util\Authenticator;
     use Model\UtenteRepository;
@@ -9,6 +10,7 @@
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
         exit;
     }
+
     $template = new League\Plates\Engine('templates', 'tpl');
 
     $user = Authenticator::getUser();
@@ -39,7 +41,6 @@
         echo $template->render('login');
         exit(0);
     }
-
     if (isset($_POST['aggiunta-questionario'])){
         if ($_SESSION['user']['ruolo'] != 'admin') {
             header('HTTP/1.0 403 Forbidden');
@@ -49,7 +50,6 @@
         $questionario = json_decode($_POST['questionario']);
         QuestionarioRepository::addQuestionario($questionario->domande, $questionario->titolo, $questionario->descrizione);
     }
-
 
     echo $template->render('index');
 
