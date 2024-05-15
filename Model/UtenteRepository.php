@@ -5,12 +5,12 @@ namespace Model;
 use Util\Connection;
 
 class UtenteRepository{
-    public static function userAuthentication(string $username, string $password):array|null{
+    public static function userAuthentication(string $mail, string $password):array|null{
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM utente INNER JOIN ruolo ON utente.idRuolo = ruolo.id WHERE username=:username';
+        $sql = 'SELECT * FROM utente INNER JOIN ruolo ON utente.idRuolo = ruolo.id WHERE mail=:mail';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-                'username' => $username
+                'mail' => $mail
             ]
         );
         if($stmt->rowCount() == 0)
@@ -21,13 +21,15 @@ class UtenteRepository{
         return $row;
     }
 
-    public static function userRegistration(string $username, string $password):void{
+    public static function userRegistration(string $mail, string $password, string $nome, string $cognome):void{
         $pdo = Connection::getInstance();
-        $sql = 'INSERT INTO utente (username, password, idRuolo) VALUES (:username, :password, 2)';
+        $sql = 'INSERT INTO utente (mail, password, nome, cognome, idRuolo) VALUES (:mail, :password, :nome, :cognome, 2)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-                'username' => $username,
-                'password' => password_hash($password, PASSWORD_DEFAULT)
+                'mail' => $mail,
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'nome' => $nome,
+                'cognome' => $cognome
             ]
         );
     }

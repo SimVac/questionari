@@ -146,7 +146,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` (`id`, `mail`, `password`, `idRuolo`, `nome`, `cognome`) VALUES (1,'pangio','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'','');
+INSERT INTO `utente` (`id`, `mail`, `password`, `idRuolo`, `nome`, `cognome`) VALUES (1,'pangiorgio.x@gmail.com','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'simone','vacca');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-15 15:55:25
+-- Dump completed on 2024-05-15 15:58:4
