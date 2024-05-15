@@ -128,14 +128,16 @@ DROP TABLE IF EXISTS `utente`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `utente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
+  `mail` varchar(64) NOT NULL,
   `password` text NOT NULL,
   `idRuolo` int(11) NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `cognome` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `utente_pk` (`username`),
+  UNIQUE KEY `utente_pk` (`mail`),
   KEY `utente_ruolo_id_fk` (`idRuolo`),
   CONSTRAINT `utente_ruolo_id_fk` FOREIGN KEY (`idRuolo`) REFERENCES `ruolo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +146,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
+INSERT INTO `utente` (`id`, `mail`, `password`, `idRuolo`, `nome`, `cognome`) VALUES (1,'pangio','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'','');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-10 19:35:17
+-- Dump completed on 2024-05-15 15:55:25
