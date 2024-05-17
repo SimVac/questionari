@@ -5,6 +5,7 @@
     use Util\Authenticator;
     use Model\UtenteRepository;
     use Model\QuestionarioRepository;
+    use Model\CompilaRepository;
 
     function page_refresh(){
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
@@ -51,6 +52,11 @@
         }
         $questionario = json_decode($_POST['questionario']);
         QuestionarioRepository::addQuestionario($questionario->domande, $questionario->titolo, $questionario->descrizione);
+    }
+
+    if (isset($_POST['compilazione-questionario'])){
+        $risposte = json_decode($_POST['risposte']);
+        CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
     }
 
     echo $template->render('index');
