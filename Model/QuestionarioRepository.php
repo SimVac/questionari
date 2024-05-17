@@ -10,20 +10,22 @@ class QuestionarioRepository
         $pdo = Connection::getInstance();
 
         //creazione questionario
-        $sql = "query";
+        $sql = 'INSERT INTO questionario (titolo, descrizione) VALUES (:titolo, :descrizione)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'titolo'=>$titolo,
             'descrizione'=>$descrizione
         ]);
+        $idQuestionario = $pdo->lastInsertId();
 
         //aggiunta domande
-        $sql = "query";
+        $sql = 'INSERT INTO domanda (ordine, testo, idQuestionario) VALUES (:ordine, :testo, :idQuestionario)';
         $stmt = $pdo->prepare($sql);
         foreach ($domande as $idx=>$testo) {
             $stmt->execute([
                 'testo' => $testo,
-                'ordine' => $idx
+                'ordine' => $idx,
+                'idQuestionario' => $idQuestionario
             ]);
         }
     }
