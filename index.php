@@ -8,6 +8,7 @@
     use Util\Authenticator;
     use Model\UtenteRepository;
     use Model\QuestionarioRepository;
+    use Model\CompilaRepository;
     use Util\Email;
 
     function page_refresh(){
@@ -62,6 +63,11 @@
             $mail = new Email($email_config);
             $mail->sendEmail($user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
         }
+    }
+
+    if (isset($_POST['compilazione-questionario'])){
+        $risposte = json_decode($_POST['risposte']);
+        CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
     }
 
     echo $template->render('index');
