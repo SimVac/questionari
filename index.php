@@ -9,6 +9,7 @@
     use Model\UtenteRepository;
     use Model\QuestionarioRepository;
     use Model\CompilaRepository;
+    use Model\DomandaRepository;
     use Util\Email;
 
     function page_refresh(){
@@ -67,7 +68,23 @@
 
     if (isset($_POST['compilazione-questionario'])){
         $risposte = json_decode($_POST['risposte']);
+        $prima_domanda = DomandaRepository::getDomandeByQuestionarioId($risposte->idQuestionario)[0];
+        if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
+            exit(0);
         CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
+        $mail = new Email($email_config);
+        $questionario = QuestionarioRepository::getQuestionarioById($risposte->idQuestionario)[0];
+        $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+        $risposte = [];
+        foreach ($domande as $domanda) {
+            $risposte[] = CompilaRepository::getRispostaByIdDomanda($domanda['id'], $_SESSION['user']['id'])[0];
+        }
+        $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1><p>Thank you for filling out the survey. Here are the answers received.</p>';
+        for ($i = 0; $i < sizeof($domande); $i++){
+            $content .= '<p><strong>' . $domande[$i]['testo'] . '</strong> ' . $risposte[$i]['risposta'] . '/7</p>';
+        }
+        $content .= '</div>';
+        $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
     echo $template->render('index');

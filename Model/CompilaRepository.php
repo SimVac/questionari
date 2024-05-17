@@ -31,5 +31,14 @@ class CompilaRepository
         }
     }
 
-
+    public static function getRispostaByIdDomanda($idDomanda, $idUtente){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM compila WHERE idDomanda = :idDomanda AND idUtente = :idUtente';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'idDomanda' => $idDomanda,
+            'idUtente' => $idUtente
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
