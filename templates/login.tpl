@@ -98,7 +98,7 @@
 
             <p class="text-center text-sm text-gray-500">
                 No account?
-                <a class="underline" href="?action=registrazione"> Sign up </a>
+                <a class="underline" href="/index.php?action=registrazione"> Sign up </a>
             </p>
 
         </div>

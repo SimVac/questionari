@@ -15,10 +15,6 @@
 
     $user = Authenticator::getUser();
 
-    if ($user == null){
-        echo $template->render('login');
-        exit(0);
-    }
 
     // GET section
     if (isset($_GET['action'])) {
@@ -33,6 +29,8 @@
         }
     }
 
+
+
     // POST section
     if (isset($_POST['registrazione'])){
         $username = $_POST['mail'];
@@ -40,10 +38,14 @@
         $nome = $_POST['nome'];
         $cognome = $_POST['cognome'];
         UtenteRepository::userRegistration($username, $password, $nome, $cognome);
-        echo $template->render('login');
+        page_refresh();
         exit(0);
     }
 
+    if ($user == null){
+        echo $template->render('login');
+        exit(0);
+    }
 
     if (isset($_POST['aggiunta-questionario'])){
         if ($_SESSION['user']['ruolo'] != 'admin') {
