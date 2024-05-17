@@ -8,7 +8,6 @@
     use Util\Authenticator;
     use Model\UtenteRepository;
     use Model\QuestionarioRepository;
-    use PHPMailer\PHPMailer\PHPMailer;
     use Util\Email;
 
     function page_refresh(){
@@ -45,7 +44,7 @@
         $nome = $_POST['nome'];
         $cognome = $_POST['cognome'];
         UtenteRepository::userRegistration($username, $password, $nome, $cognome);
-        echo $template->render('login');
+        page_refresh();
         exit(0);
     }
     if (isset($_POST['aggiunta-questionario'])){
@@ -61,7 +60,7 @@
         $users = UtenteRepository::listAll();
         foreach ($users as $user) {
             $mail = new Email($email_config);
-            $mail->sendEmail($user['mail'], 'New Survey!', 'New survey');
+            $mail->sendEmail($user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
         }
     }
 
