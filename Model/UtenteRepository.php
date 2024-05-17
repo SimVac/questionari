@@ -33,4 +33,12 @@ class UtenteRepository{
             ]
         );
     }
+
+    public static function listAll(){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM utente';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
