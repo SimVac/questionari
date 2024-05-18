@@ -41,10 +41,14 @@
     if (isset($_POST['registrazione'])){
         $username = $_POST['mail'];
         $password = $_POST['password'];
-        $nome = $_POST['nome'];
-        $cognome = $_POST['cognome'];
-        UtenteRepository::userRegistration($username, $password, $nome, $cognome);
-        page_refresh();
+        $passwordConferma = $_POST['password_confirmation'];
+        if ($password == $passwordConferma){
+            $nome = $_POST['nome'];
+            $cognome = $_POST['cognome'];
+            UtenteRepository::userRegistration($username, $password, $nome, $cognome);
+            page_refresh();
+            exit(0);
+        }
         exit(0);
     }
 

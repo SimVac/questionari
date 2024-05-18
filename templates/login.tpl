@@ -11,15 +11,15 @@
 <body>
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-lg">
-        <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">Get started today</h1>
+        <h1 class="text-center text-2xl font-bold text-emerald-600 sm:text-3xl">Welcome to QuestionAPP</h1>
 
         <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
-            Enter now and start filling out survey.
+            Enter now and start filling out any type of survey.
         </p>
 
 
         <div class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-            <form action="/index.php" method="post" class="mb-0 mt-6 space-y-4">
+            <form method="post" class="mb-0 mt-6 space-y-4">
                 <p class="text-center text-lg font-medium">Sign in to your account</p>
 
                 <div>
@@ -31,6 +31,7 @@
                                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter email"
                                 name="mail"
+                                required
                         />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -61,6 +62,7 @@
                                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter password"
                                 name="password"
+                                required
                         />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -90,7 +92,7 @@
 
                 <button
                         type="submit"
-                        class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+                        class="block w-full rounded-lg bg-emerald-600 px-5 py-3 text-sm font-medium text-white"
                 >
                     Sign in
                 </button>
