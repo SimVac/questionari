@@ -29,4 +29,14 @@ class QuestionarioRepository
             ]);
         }
     }
+
+    public static function getQuestionarioById($idQuestionario){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM questionario WHERE questionario.id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id'=>$idQuestionario
+        ]);
+        return $stmt->fetchAll();
+    }
 }
