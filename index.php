@@ -14,17 +14,11 @@
 
     function page_refresh(){
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
-        exit;
     }
 
     $template = new League\Plates\Engine('templates', 'tpl');
 
     $user = Authenticator::getUser();
-
-    if ($user == null){
-        echo $template->render('login');
-        exit(0);
-    }
 
     // GET section
     if (isset($_GET['action'])) {
@@ -41,14 +35,21 @@
 
     // POST section
     if (isset($_POST['registrazione'])){
-        $username = $_POST['mail'];
+        $mail = $_POST['mail'];
         $password = $_POST['password'];
         $nome = $_POST['nome'];
         $cognome = $_POST['cognome'];
-        UtenteRepository::userRegistration($username, $password, $nome, $cognome);
+        UtenteRepository::userRegistration($mail, $password, $nome, $cognome);
+        $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
         page_refresh();
         exit(0);
     }
+
+    if ($user == null){
+        echo $template->render('login');
+        exit(0);
+    }
+
     if (isset($_POST['aggiunta-questionario'])){
         if ($_SESSION['user']['ruolo'] != 'admin') {
             header('HTTP/1.0 403 Forbidden');
