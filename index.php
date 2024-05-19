@@ -33,6 +33,8 @@
         }
     }
 
+
+
     // POST section
     if (isset($_POST['registrazione'])){
         $mail = $_POST['mail'];
@@ -99,6 +101,6 @@
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
-    echo $template->render('index');
+    echo $template->render('home');
 
 
