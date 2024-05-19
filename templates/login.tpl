@@ -11,7 +11,7 @@
 <body>
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-lg">
-        <h1 class="text-center text-2xl font-bold text-emerald-600 sm:text-3xl">Welcome to QuestionAPP</h1>
+        <h1 class="text-center text-2xl font-bold text-orange-500 sm:text-3xl">Welcome to QuestionAPP</h1>
 
         <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
             Enter now and start filling out any type of survey.
@@ -92,7 +92,7 @@
 
                 <button
                         type="submit"
-                        class="block w-full rounded-lg bg-emerald-600 px-5 py-3 text-sm font-medium text-white"
+                        class="block w-full rounded-lg bg-orange-500 px-5 py-3 text-sm font-medium text-white"
                 >
                     Sign in
                 </button>

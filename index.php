@@ -101,6 +101,6 @@
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
-    echo $template->render('index');
+    echo $template->render('home');
 
 

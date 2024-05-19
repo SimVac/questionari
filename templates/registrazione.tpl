@@ -163,18 +163,23 @@
                     </div>
 
                     <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                        <button
+                        <input
                                 type="button"
-                                class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500"
+                                class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-emerald-500"
                                 onclick="check()"
+                                value="Create an account"
+                                id="submitBtn"
                         >
-                            Create an account
-                        </button>
 
                         <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             Already have an account?
                             <a href="/index.php" class="text-gray-700 underline">Log in</a>.
                         </p>
+                    </div>
+                    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+                        <span class="mt-2 text-pink-600 text-sm invisible" id="error2">
+                            Compile every field
+                        </span>
                     </div>
                 </form>
             </div>
@@ -186,11 +191,19 @@
     console.log("ok")
     let  pass = document.getElementById("Password")
     let passc = document.getElementById("PasswordConfirmation")
+    nome = document.getElementById("FirstName")
+    lastName = document.getElementById("LastName")
+    mail = document.getElementById("Email")
     let error = document.getElementById("error")
     let form = document.getElementById("myForm")
+    errord = document.getElementById("error2")
 
     function check(){
-        if (pass.value != passc.value){
+        if(nome.value == "" || lastName.value == "" || mail.value == ""){
+            errord.classList.remove("invisible")
+            errord.classList.add("visible")
+        }
+        else if (pass.value != passc.value){
             error.classList.remove("invisible")
             error.classList.add("visible")
         }else{
