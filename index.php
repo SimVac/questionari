@@ -14,13 +14,11 @@
 
     function page_refresh(){
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
-        exit;
     }
 
     $template = new League\Plates\Engine('templates', 'tpl');
 
     $user = Authenticator::getUser();
-
 
     // GET section
     if (isset($_GET['action'])) {
@@ -39,16 +37,24 @@
 
     // POST section
     if (isset($_POST['registrazione'])){
-        $username = $_POST['mail'];
+        $mail = $_POST['mail'];
         $password = $_POST['password'];
-        $passwordConferma = $_POST['password_confirmation'];
-        if ($password == $passwordConferma){
-            $nome = $_POST['nome'];
-            $cognome = $_POST['cognome'];
-            UtenteRepository::userRegistration($username, $password, $nome, $cognome);
-            page_refresh();
+        $nome = $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        try {
+            UtenteRepository::userRegistration($mail, $password, $nome, $cognome);
+        }catch (Exception $e){
+            $template->render('registrazione', [
+                'failed'=>true
+            ]);
             exit(0);
         }
+        $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
+
+        $email = new Email($email_config);
+        $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+
+        page_refresh();
         exit(0);
     }
 
