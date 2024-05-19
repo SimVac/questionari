@@ -39,7 +39,14 @@
         $password = $_POST['password'];
         $nome = $_POST['nome'];
         $cognome = $_POST['cognome'];
-        UtenteRepository::userRegistration($mail, $password, $nome, $cognome);
+        try {
+            UtenteRepository::userRegistration($mail, $password, $nome, $cognome);
+        }catch (Exception $e){
+            $template->render('registrazione', [
+                'failed'=>true
+            ]);
+            exit(0);
+        }
         $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
 
         $email = new Email($email_config);
