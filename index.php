@@ -41,6 +41,10 @@
         $cognome = $_POST['cognome'];
         UtenteRepository::userRegistration($mail, $password, $nome, $cognome);
         $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
+
+        $email = new Email($email_config);
+        $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+
         page_refresh();
         exit(0);
     }
