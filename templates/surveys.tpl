@@ -13,7 +13,7 @@
     <header class="bg-orange-500">
         <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
             <div class="flex flex w-1/4 justify-between items-center">
-                <a class="block text-teal-600" href="#">
+                <a class="block text-teal-600" href="index.php">
                     <span class="sr-only">Home</span>
                     <svg width="3rem" height="3rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -37,36 +37,31 @@
                     <nav aria-label="Global" class="hidden md:block">
                         <ul class="flex items-center gap-6 text-sm">
                             <li>
-                                <a class="text-white transition hover:text-gray-500/75" href="#"> About </a>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php"> Home </a>
                             </li>
 
                             <li>
-                                <a class="text-white transition hover:text-gray-500/75" href="#"> Surveys </a>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
                             </li>
 
                             <li>
-                                <a class="text-white transition hover:text-gray-500/75" href="#"> Home </a>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> About </a>
                             </li>
                         </ul>
                     </nav>
 
                     <div class="flex items-center gap-4">
-                        <div class="sm:flex sm:gap-4">
-                            <div class="hidden sm:flex">
-                                <a
-                                        class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
-                                        href="index.php?action=login"
-                                >
-                                    Login
-                                </a>
-                            </div>
-                            <a
-                                    class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                                    href="index.php?action=registrazione"
-                            >
-                                Register
-                            </a>
-                        </div>
+                        <a href="#">
+                            <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M691.573 338.89c-1.282 109.275-89.055 197.047-198.33 198.331-109.292 1.282-197.065-90.984-198.325-198.331-0.809-68.918-107.758-68.998-106.948 0 1.968 167.591 137.681 303.31 305.272 305.278C660.85 646.136 796.587 503.52 798.521 338.89c0.811-68.998-106.136-68.918-106.948 0z"
+                                      fill="#4A5699"/>
+                                <path d="M294.918 325.158c1.283-109.272 89.051-197.047 198.325-198.33 109.292-1.283 197.068 90.983 198.33 198.33 0.812 68.919 107.759 68.998 106.948 0C796.555 157.567 660.839 21.842 493.243 19.88c-167.604-1.963-303.341 140.65-305.272 305.278-0.811 68.998 106.139 68.919 106.947 0z"
+                                      fill="#C45FA0"/>
+                                <path d="M222.324 959.994c0.65-74.688 29.145-144.534 80.868-197.979 53.219-54.995 126.117-84.134 201.904-84.794 74.199-0.646 145.202 29.791 197.979 80.867 54.995 53.219 84.13 126.119 84.79 201.905 0.603 68.932 107.549 68.99 106.947 0-1.857-213.527-176.184-387.865-389.716-389.721-213.551-1.854-387.885 178.986-389.721 389.721-0.601 68.991 106.349 68.933 106.949 0.001z"
+                                      fill="#E5594F"/>
+                            </svg>
+                        </a>
 
                         <div class="block md:hidden">
                             <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
@@ -88,17 +83,17 @@
         </div>
     </header>
 
-    <section>
-        <div>
-            <h1 class="text-center text-6xl font-bold text-orange-500 pt-4">Survey</h1>
-            <p class="mx-auto mt-5 max-w-2xl text-center text-gray-500 text-2xl">
-                Qualcosa di scritto ancora da decidere, slogan o info su come usare l'app
+    <section class="h-52 flex justify-center items-center ">
+        <div class="flex flex-col justify-evenly h-full">
+            <h1 class="text-center text-6xl font-bold text-orange-500">Explore!</h1>
+            <p class="mx-auto max-w-3xl text-center text-gray-500 text-2xl">
+                Browse the list of questionnaires and click on the "compile" button to start answering. Use the search bar for faster research!
             </p>
         </div>
     </section>
     <section class="flex flex-col h-3/4 justify-between">
         <div>
-            <form class="max-w-sm mx-auto mt-6">
+            <form class="max-w-sm mx-auto mt-4">
                 <label for="default-search" class=" text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -106,17 +101,17 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Search survey..." required />
-                    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-600 ">Search</button>
+                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Search survey..." required />
+                    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-600 ">Search</button>
                 </div>
             </form>
         </div>
 
-        <div>
+        <div class="mt-4">
             <div>
                 <section class=" max-w-screen-lg mx-auto px-4 md:px-8">
                     <ul class="space-y-6">
-                        <li class="p-5 bg-white rounded-md shadow-sm">
+                        <li class="p-5 bg-white rounded-md shadow-md">
                             <a>
                                 <div>
                                     <div class="justify-between sm:flex">
@@ -126,7 +121,7 @@
                                         </div>
                                         <div class="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
                                             <span class="flex items-center text-gray-500">
-                                                <a class="inline-block rounded border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-orange-400"
+                                                <a class="inline-block rounded border border-red-500 bg-red-500 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-500 focus:outline-none focus:ring active:text-red-400"
                                                    href="#"
                                                 > Compile </a>
                                             </span>
@@ -155,7 +150,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="p-5 bg-white rounded-md shadow-sm">
+                        <li class="p-5 bg-white rounded-md shadow-md">
                             <a>
                                 <div>
                                     <div class="justify-between sm:flex">
@@ -218,82 +213,6 @@
 
   This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
 -->
-        <div class="pt-4">
-            <ol class="flex justify-center gap-1 text-xs font-medium">
-                <li>
-                    <a
-                            href="#"
-                            class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
-                    >
-                        <span class="sr-only">Prev Page</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                        >
-                            <path
-                                    fill-rule="evenodd"
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clip-rule="evenodd"
-                            />
-                        </svg>
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                            href="#"
-                            class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-                    >
-                        1
-                    </a>
-                </li>
-
-                <li class="block size-8 rounded border-orange-600 bg-orange-600 text-center leading-8 text-white">
-                    2
-                </li>
-
-                <li>
-                    <a
-                            href="#"
-                            class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-                    >
-                        3
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                            href="#"
-                            class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-                    >
-                        4
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                            href="#"
-                            class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
-                    >
-                        <span class="sr-only">Next Page</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                        >
-                            <path
-                                    fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"
-                            />
-                        </svg>
-                    </a>
-                </li>
-            </ol>
-        </div>
 
     </section>
 
