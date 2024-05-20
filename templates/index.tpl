@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Survey</title>
+</head>
+<body>
+<header class="bg-orange-500">
+    <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
+        <div class="flex flex w-1/4 justify-between items-center">
+            <a class="block text-teal-600" href="#">
+                <span class="sr-only">Home</span>
+                <svg width="3rem" height="3rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M877.387 523.945c-1.663 198.958-163.571 360.868-362.532 362.531-198.991 1.661-360.885-166.07-362.526-362.531-0.697-83.354-130.015-83.42-129.318 0 1.064 127.401 49.851 247.752 136.97 340.531 86.427 92.047 208.144 143.457 333.116 150.77 127.267 7.454 251.374-40.885 347.279-122.774 96.086-82.04 150.659-201.304 164.166-325.296 1.565-14.352 2.04-28.805 2.16-43.23 0.697-83.421-128.618-83.355-129.315-0.001z"
+                          fill="#4A5699"/>
+                    <path d="M152.329 500.646c1.662-198.965 163.563-360.875 362.526-362.537 83.354-0.697 83.419-130.013 0-129.317-129.524 1.081-252.396 51.567-345.385 141.68C75.465 241.564 24.097 370.538 23.011 500.646c-0.697 83.421 128.62 83.349 129.318 0z"
+                          fill="#C45FA0"/>
+                    <path d="M400.998 617.112c-54.167-72.265-46.168-154.096 21.221-212.268 63.03-54.412 156.255-33.802 209.578 32.46 22.13 27.497 68.54 22.901 91.441 0 26.914-26.917 22.073-64.009 0-91.44-89.215-110.859-259.653-132.629-373.618-47.204-118.817 89.062-151.202 262.422-60.284 383.718 21.095 28.142 55.432 42.548 88.465 23.196 27.799-16.282 44.387-60.192 23.197-88.462z"
+                          fill="#E5594F"/>
+                    <path d="M628.723 433.281c30.673 40.924 38.604 71.548 34.179 119.265 0.715-5.845 0.408-4.79-0.924 3.173-1.3 6.769-3.259 13.386-5.207 19.983-4.113 13.896-2.982 9.9-9.75 22.736-11.978 22.716-23.474 34.203-45.271 51.746-27.499 22.131-22.904 68.538 0 91.441 26.914 26.913 64.011 22.075 91.439 0 110.85-89.224 132.613-259.649 47.193-373.614-21.092-28.142-55.431-42.546-88.466-23.196-27.799 16.287-44.384 60.193-23.193 88.466z"
+                          fill="#F39A2B"/>
+                </svg>
+            </a>
+
+            <h1 class="text-center text-2xl font-bold text-white sm:text-3xl">QuestionAPP</h1>
+        </div>
+
+        <div class="flex flex items-center justify-end md:justify-between">
+
+            <div class="md:flex md:items-center md:gap-12">
+                <nav aria-label="Global" class="hidden md:block">
+                    <ul class="flex items-center gap-6 text-sm">
+                        <li>
+                            <a class="text-white transition hover:text-gray-500/75" href="#"> About </a>
+                        </li>
+
+                        <li>
+                            <a class="text-white transition hover:text-gray-500/75" href="#"> Surveys </a>
+                        </li>
+
+                        <li>
+                            <a class="text-white transition hover:text-gray-500/75" href="#"> Home </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <div class="sm:flex sm:gap-4">
+                        <div class="hidden sm:flex">
+                            <a
+                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
+                                    href="index.php?action=login"
+                            >
+                                Login
+                            </a>
+                        </div>
+                        <a
+                                class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                                href="index.php?action=registrazione"
+                        >
+                            Register
+                        </a>
+                    </div>
+
+                    <div class="block md:hidden">
+                        <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="flex flex-row justify-center">
+    <div class="flex flex-row justify-around h-96 w-11/12 items-center">
+        <div class="flex flex-col justify-around h-60 w-96 items-start">
+            <h1 class="text-4xl font-bold text-orange-500 sm:text-4xl">Why should I use QuestionAPP?</h1>
+            <p class="text-gray-700 text-lg">
+                Welcome to Brixton, i'm in the party with barbies and drillers
+            </p>
+            <a
+                    class="rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500"
+                    href="index.php?action=registrazione"
+            >
+                Sign up free
+            </a>
+        </div>
+        <div class="flex justify-center pr-2">
+            <img src="../img/home.jpg" height="300" width="353.5">
+        </div>
+    </div>
+</div>
+
+<div class="bg-neutral-50 h-[15.3rem] flex justify-center items-center">
+    <div class="flex flex-row justify-around w-10/12 h-5/6">
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
+            </svg>
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Need a help in QuestionAPP?</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Don't worry it's really easy and intuitive, you won't have any problems :)</p>
+        </div>
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
+            </svg>
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Why QuestionAPP?</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Because our website has a modern layout and it's users friendly</p>
+        </div>
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
+            </svg>
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Contact us</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">If you need any help you can contact us in the about page, we will answer ASAP</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

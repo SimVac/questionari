@@ -22,6 +22,9 @@
 
     // GET section
     if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'login'){
+            echo $template ->render('login');
+        }
         if ($_GET['action'] == 'logout'){
             Authenticator::logout();
             page_refresh();
@@ -32,7 +35,6 @@
             exit(0);
         }
     }
-
 
 
     // POST section
@@ -59,7 +61,7 @@
     }
 
     if ($user == null){
-        echo $template->render('login');
+        echo $template->render('index');
         exit(0);
     }
 
