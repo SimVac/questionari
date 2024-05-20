@@ -19,7 +19,7 @@
 
 
         <div class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-            <form method="post" class="mb-0 mt-6 space-y-4">
+            <form action="index.php" method="post" class="mb-0 mt-6 space-y-4">
                 <p class="text-center text-lg font-medium">Sign in to your account</p>
 
                 <div>
@@ -28,7 +28,7 @@
                     <div class="relative">
                         <input
                                 type="email"
-                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
                                 placeholder="Enter email"
                                 name="mail"
                                 required
@@ -59,7 +59,7 @@
                     <div class="relative">
                         <input
                                 type="password"
-                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
                                 placeholder="Enter password"
                                 name="password"
                                 required

@@ -62,8 +62,25 @@
     }
 
     if ($user == null){
-        echo $template->render('index');
+        echo $template->render('index', [
+            'logged'=>false
+        ]);
         exit(0);
+    }
+
+    if (isset($_GET['action'])){
+        if ($_GET['action'] == 'surveys'){
+            $questionari = QuestionarioRepository::getQuestionari();
+            foreach ($questionari as $questionario){
+                $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0], $_SESSION['user']['id'])) > 0;
+            }
+
+            echo $template->render('surveys', [
+                'questionari'=>$questionari,
+                'logged'=>true
+            ]);
+            exit(0);
+        }
     }
 
     if (isset($_POST['aggiunta-questionario'])){
@@ -104,13 +121,8 @@
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
-    $questionari = QuestionarioRepository::getQuestionari();
-    foreach ($questionari as $questionario){
-        $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])) > 0;
-    }
-
-    echo $template->render('surveys', [
-        'questionari'=>$questionari
+    echo $template->render('index', [
+        'logged'=>isset($_SESSION['user'])
     ]);
 
 
