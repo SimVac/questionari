@@ -19,7 +19,7 @@
 
 
         <div class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-            <form action="index.php" method="post" class="mb-0 mt-6 space-y-4">
+            <form action="index.php" method="post" class="mb-0 mt-6 space-y-4" onsubmit="loginForm(event)" id="form">
                 <p class="text-center text-lg font-medium">Sign in to your account</p>
 
                 <div>
@@ -106,5 +106,22 @@
         </div>
     </div>
 </div>
+<script>
+    console.log(localStorage['page'] ? ("index.php?action=" + localStorage['page']) : "index.php")
+
+    function loginForm(event){
+        event.preventDefault();
+
+        const formData = new FormData(document.getElementById('form'));
+
+        fetch('index.php', {
+            method: "POST",
+            body: formData
+        }).then(() => {
+            window.location.replace(localStorage['page'] ? ("index.php?action=" + localStorage['page']) : "index.php");
+            localStorage.removeItem('page');
+        })
+    }
+</script>
 </body>
 </html>
