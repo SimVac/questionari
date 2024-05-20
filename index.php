@@ -24,6 +24,7 @@
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'login'){
             echo $template ->render('login');
+            exit(0);
         }
         if ($_GET['action'] == 'logout'){
             Authenticator::logout();
