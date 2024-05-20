@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
 --
 -- Host: 127.0.0.1    Database: questionari
 -- ------------------------------------------------------
--- Server version	10.4.28-MariaDB
+-- Server version	10.4.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `compila` (
   KEY `compila_utente_id_fk` (`idUtente`),
   CONSTRAINT `compila_domanda_id_fk` FOREIGN KEY (`idDomanda`) REFERENCES `domanda` (`id`),
   CONSTRAINT `compila_utente_id_fk` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `domanda` (
   PRIMARY KEY (`id`),
   KEY `domanda_questionario_id_fk` (`idQuestionario`),
   CONSTRAINT `domanda_questionario_id_fk` FOREIGN KEY (`idQuestionario`) REFERENCES `questionario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,8 +82,12 @@ CREATE TABLE `questionario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titolo` text DEFAULT NULL,
   `descrizione` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `data` date NOT NULL,
+  `idAutore` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `questionario_utente_id_fk` (`idAutore`),
+  CONSTRAINT `questionario_utente_id_fk` FOREIGN KEY (`idAutore`) REFERENCES `utente` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +119,7 @@ CREATE TABLE `ruolo` (
 
 LOCK TABLES `ruolo` WRITE;
 /*!40000 ALTER TABLE `ruolo` DISABLE KEYS */;
-INSERT INTO `ruolo` (`id`, `ruolo`) VALUES (1,'admin'),(2,'user');
+INSERT INTO `ruolo` VALUES (1,'admin'),(2,'user');
 /*!40000 ALTER TABLE `ruolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +141,7 @@ CREATE TABLE `utente` (
   UNIQUE KEY `utente_pk` (`mail`),
   KEY `utente_ruolo_id_fk` (`idRuolo`),
   CONSTRAINT `utente_ruolo_id_fk` FOREIGN KEY (`idRuolo`) REFERENCES `ruolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +150,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` (`id`, `mail`, `password`, `idRuolo`, `nome`, `cognome`) VALUES (1,'pangiorgio.x@gmail.com','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'simone','vacca');
+INSERT INTO `utente` VALUES (1,'pangiorgio.x@gmail.com','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'simone','vacca');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-15 15:58:4
+-- Dump completed on 2024-05-20  9:39:05

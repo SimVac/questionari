@@ -6,15 +6,16 @@ use Util\Connection;
 
 class QuestionarioRepository
 {
-    public static function addQuestionario(array $domande, string $titolo, string $descrizione){
+    public static function addQuestionario(array $domande, string $titolo, string $descrizione, $idAutore){
         $pdo = Connection::getInstance();
 
         //creazione questionario
-        $sql = 'INSERT INTO questionario (titolo, descrizione) VALUES (:titolo, :descrizione)';
+        $sql = 'INSERT INTO questionario (titolo, descrizione, data, idAutore) VALUES (:titolo, :descrizione, CURRENT_DATE(), :idAutore)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'titolo'=>$titolo,
-            'descrizione'=>$descrizione
+            'descrizione'=>$descrizione,
+            'idAutore'=>$idAutore
         ]);
         $idQuestionario = $pdo->lastInsertId();
 
@@ -32,11 +33,19 @@ class QuestionarioRepository
 
     public static function getQuestionarioById($idQuestionario){
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM questionario WHERE questionario.id = :id';
+        $sql = 'SELECT * FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id WHERE questionario.id = :id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'id'=>$idQuestionario
         ]);
+        return $stmt->fetchAll();
+    }
+
+    public static function getQuestionari(){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 }
