@@ -66,7 +66,7 @@
                     </p>
                 </div>
 
-                <form action="/index.php" method="post" class="mt-8 grid grid-cols-6 gap-6" id="myForm">
+                <form action="index.php" method="post" class="mt-8 grid grid-cols-6 gap-6" id="myForm">
                     <input type="hidden" name="registrazione" value="true">
                     <div class="col-span-6 sm:col-span-3">
                         <label for="FirstName" class="block text-sm font-medium text-gray-700 pb-2">
@@ -173,7 +173,7 @@
 
                         <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             Already have an account?
-                            <a href="/index.php" class="text-gray-700 underline">Log in</a>.
+                            <a href="index.php" class="text-gray-700 underline">Log in</a>.
                         </p>
                     </div>
                     <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
