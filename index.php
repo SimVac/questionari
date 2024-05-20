@@ -81,6 +81,15 @@
             ]);
             exit(0);
         }
+        if ($_GET['action'] == 'profile'){
+            echo $template->render('profile');
+            exit(0);
+        }
+        if ($_GET['action'] == 'create'){
+            echo $template->render('create');
+            exit(0);
+        }
+
     }
 
     if (isset($_POST['aggiunta-questionario'])){
