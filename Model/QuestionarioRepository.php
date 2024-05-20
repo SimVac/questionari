@@ -6,7 +6,7 @@ use Util\Connection;
 
 class QuestionarioRepository
 {
-    public static function addQuestionario(array $domande, string $titolo, string $descrizione){
+    public static function addQuestionario(array $domande, string $titolo, string $descrizione, $idAutore){
         $pdo = Connection::getInstance();
 
         //creazione questionario
@@ -15,7 +15,7 @@ class QuestionarioRepository
         $stmt->execute([
             'titolo'=>$titolo,
             'descrizione'=>$descrizione,
-            'idAutore'=>$_SESSION['user']['id']
+            'idAutore'=>$idAutore
         ]);
         $idQuestionario = $pdo->lastInsertId();
 
@@ -38,6 +38,14 @@ class QuestionarioRepository
         $stmt->execute([
             'id'=>$idQuestionario
         ]);
+        return $stmt->fetchAll();
+    }
+
+    public static function getQuestionari(){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 }

@@ -70,7 +70,7 @@
             exit(0);
         }
         $questionario = json_decode($_POST['questionario']);
-        QuestionarioRepository::addQuestionario($questionario->domande, $questionario->titolo, $questionario->descrizione);
+        QuestionarioRepository::addQuestionario($questionario->domande, $questionario->titolo, $questionario->descrizione, $_SESSION['user']['id']);
 
         // manda mail a tutti
         $users = UtenteRepository::listAll();
@@ -101,6 +101,13 @@
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
-    echo $template->render('home');
+    $questionari = QuestionarioRepository::getQuestionari();
+    foreach ($questionari as $questionario){
+        $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])) > 0;
+    }
+
+    echo $template->render('surveys', [
+        'questionari'=>$questionari
+    ]);
 
 
