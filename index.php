@@ -77,6 +77,7 @@
 
             echo $template->render('surveys', [
                 'questionari'=>$questionari,
+                'admin' => $_SESSION['user']['ruolo'] == 'admin',
                 'logged'=>true
             ]);
             exit(0);
