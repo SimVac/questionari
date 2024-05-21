@@ -72,8 +72,8 @@
         if ($_GET['action'] == 'surveys'){
             $questionari = QuestionarioRepository::getQuestionari();
 
-            foreach ($questionari as $questionario){
-                $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0], $_SESSION['user']['id'])) > 0;
+            foreach ($questionari as &$questionario){
+                $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0]['id'], $_SESSION['user']['id'])) > 0;
             }
             echo $template->render('surveys', [
                 'questionari'=>$questionari,
@@ -91,7 +91,17 @@
             exit(0);
         }
         if ($_GET['action'] == 'compile'){
-            echo $template->render('compila');
+            if (isset($_GET['q'])){
+                $questionario = QuestionarioRepository::getQuestionarioById($_GET['q'])[0];
+                $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+                echo $template->render('compila', [
+                    'questionario' => $questionario,
+                    'domande' => $domande
+                ]);
+            }else{
+                echo $template->render('error');
+            }
+
             exit(0);
         }
         if($_GET['action'] == 'about'){

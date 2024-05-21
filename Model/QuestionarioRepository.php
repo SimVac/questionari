@@ -33,7 +33,7 @@ class QuestionarioRepository
 
     public static function getQuestionarioById($idQuestionario){
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id WHERE questionario.id = :id';
+        $sql = 'SELECT questionario.*, utente.nome, utente.cognome FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id WHERE questionario.id = :id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'id'=>$idQuestionario
@@ -43,7 +43,7 @@ class QuestionarioRepository
 
     public static function getQuestionari(){
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id';
+        $sql = 'SELECT questionario.*, utente.nome, utente.cognome FROM questionario INNER JOIN utente ON questionario.idAutore = utente.id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();

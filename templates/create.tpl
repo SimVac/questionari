@@ -172,6 +172,6 @@
         </div>
     </div>
 </section>
-<script src="/scripts/create.js"></script>
+<script src="scripts/create.js"></script>
 </body>
 </html>

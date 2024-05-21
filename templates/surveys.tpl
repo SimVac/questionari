@@ -149,11 +149,11 @@
                                                 <h3 class="text-xl font-medium text-orange-600"> <?= $questionario['titolo'] ?> </h3>
                                                 <p class="text-gray-500 mt-2 pr-2"><?= $questionario['descrizione'] ?></p>
                                             </div>
-                                            <?php if ($questionario['completato']): ?>
+                                            <?php if (!$questionario['completato']): ?>
                                                 <div class="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
                                                 <span class="flex items-center text-gray-500">
                                                     <a class="inline-block rounded border border-red-500 bg-red-500 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-500 focus:outline-none focus:ring active:text-red-400"
-                                                       href="index.php?action=compila&q=<?= questionario['id'] ?>"
+                                                       href="index.php?action=compile&q=<?= $questionario['id'] ?>"
                                                     > Compile </a>
                                                 </span>
                                             </div>
