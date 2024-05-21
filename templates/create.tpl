@@ -139,7 +139,7 @@
 
                         <button type="button"
                                 class="rounded bg-red-500 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-600"
-                        >
+                        onclick="createQuestion()">
                             Add
                         </button>
                     </div>
@@ -148,7 +148,7 @@
 
     </div>
     <div class="flex flex-col items-center justify-evenly h-fit">
-        <div class="h-fit w-6/12 pt-8 pb-2">
+        <div class="h-fit w-6/12 pt-8 pb-2" id="questionsContainer">
             <div class="flex justify-between max-w-3xl pb-4">
                 <p class="block text-xl font-medium max-w-md text-gray-700"> 1. Question </p>
                 <button>
@@ -170,6 +170,6 @@
         </div>
     </div>
 </section>
-
+<script src="scripts/create.js"></script>
 </body>
 </html>
