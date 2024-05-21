@@ -1,7 +1,10 @@
-idx = 1
+let idx = 1
+let questions = []
 
 function createQuestion(){
     const questionText = document.getElementById('newQuestion').value;
+    if (questionText === '') return;
+    questions.push(questionText)
 
     const questionComponent = document.createElement('div');
     questionComponent.className = 'flex justify-between max-w-3xl pb-4';
@@ -22,13 +25,49 @@ function createQuestion(){
                 </svg>
             `;
 
-    buttonElement.onclick = (id=idx) => {
-        document.getElementById(id).remove();
-    }
+    buttonElement.onclick = () => {
+        questionComponent.remove();
+        let count = 1;
+        questions = [];
+        for (let element of document.getElementById('questionsContainer').children){
+            let str = element.getElementsByTagName('p')[0].textContent.split(' - ');
+            str.shift();
+            let question = str.join('')
+            questions.push(question)
+            element.getElementsByTagName('p')[0].textContent = count + ' - ' + question;
+            count++;
+        }
+        idx = count;
+    };
 
     questionComponent.appendChild(pElement);
     questionComponent.appendChild(buttonElement);
 
     document.getElementById('questionsContainer').appendChild(questionComponent);
     idx++;
+    clearQuestion();
+}
+
+function clearQuestion(){
+    document.getElementById('newQuestion').value = '';
+}
+
+function sendData(){
+    let data = {
+        titolo: document.getElementById('title').value,
+        descrizione: document.getElementById('description').value,
+        domande: questions
+    };
+
+    if (data.titolo === '' || data.descrizione === '' || data.domande.length === 0)
+        return;
+
+    let form = new FormData();
+    form.append('aggiunta-questionario', '');
+    form.append('questionario', JSON.stringify(data));
+
+    fetch('index.php', {
+        method: 'POST',
+        body: form
+    }).then(() => window.location.replace('index.php?action=surveys'))
 }

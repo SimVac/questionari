@@ -122,7 +122,7 @@
                     </a>
                 </div>
                 <div class="flex justify-center pr-2">
-                    <img src="../img/home.jpg" height="300" width="353.5">
+                    <img src="img/home.jpg" height="300" width="353.5">
                 </div>
             </div>
         </div>
