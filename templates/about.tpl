@@ -9,7 +9,7 @@
     <title>Survey</title>
 </head>
 <body>
-<header class="bg-orange-500">
+<header class="bg-orange-500 h-fit">
     <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
         <div class="flex flex w-1/4 justify-between items-center">
             <a class="block text-teal-600" href="index.php">
@@ -40,7 +40,11 @@
                         </li>
 
                         <li>
+                            <?php if(!$logged) : ?>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
+                            <?php else: ?>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
+                            <?php endif; ?>
                         </li>
 
                         <li>
@@ -50,6 +54,24 @@
                 </nav>
 
                 <div class="flex items-center gap-4">
+                    <?php if (!$logged): ?>
+                    <div class="sm:flex sm:gap-4">
+                        <div class="hidden sm:flex">
+                            <a
+                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
+                                    href="index.php?action=login"
+                            >
+                                Login
+                            </a>
+                        </div>
+                        <a
+                                class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                                href="index.php?action=registrazione"
+                        >
+                            Register
+                        </a>
+                    </div>
+                    <?php else: ?>
                     <a href="index.php?action=profile">
                         <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +83,7 @@
                                   fill="#E5594F"/>
                         </svg>
                     </a>
-
+                    <?php endif; ?>
                     <div class="block md:hidden">
                         <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                             <svg
@@ -82,47 +104,26 @@
     </div>
 </header>
 
-<section>
-    <form action="index.php" method="post">
-        <div class="flex flex-col justify-between">
-            <section class="h-40 flex justify-center items-center ">
-                <div class="flex flex-col justify-evenly h-full">
-                    <h1 class="text-center text-4xl font-bold text-orange-500"> <?= $questionario['titolo'] ?> </h1>
-                    <p class="mx-auto max-w-xl text-center text-gray-500 text-2xl">
-                        <?= $questionario['descrizione'] ?>
-                    </p>
-                </div>
-            </section>
-
-            <?php $i = 0 ?>
-            <?php foreach($domande as $domanda): ?>
-            <?php $i += 1 ?>
-                <div class="flex flex-col items-center">
-                <div class="w-6/12 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div class="h-10 flex flex-wrap items-center text-md font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
-                        <p class="pl-4">Question n <?= $i ?> </p>
-                    </div>
-                    <div>
-                        <p class="p-4 text-lg w-full break-all "> <?= domanda['testo'] ?> </p>
-                    </div>
-                    <div class="relative pl-4 pr-4 pb-4">
-                        <label for="labels-range-input" class="sr-only">Labels range</label>
-                        <input id="labels-range-input" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-                        <div class="w-full flex justify-between pt-4">
-                            <?php for ($i=1; $i < 8; $i+=1): ?>
-                                <span class="text-sm text-gray-500 dark:text-gray-400 -bottom-6"> <?= $i ?> </span>
-                            <?php endfor; ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-6">
-                    <input type="submit" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" value="Send!">
-                </div>
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+        <h2 class="mb-4 text-4xl tracking-tight font-bold text-center text-orange-500 dark:text-white">Contact Us</h2>
+        <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got any type of issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
+        <form action="index.php" method="post" class="space-y-8">
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
+                <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
             </div>
-            <?php endforeach; ?>
-        </div>
-    </form>
-
+            <div>
+                <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+                <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required>
+            </div>
+            <div class="sm:col-span-2">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
+                <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+            </div>
+            <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-orange-500 sm:w-fit hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
+        </form>
+    </div>
 </section>
 
 </body>

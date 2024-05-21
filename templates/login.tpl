@@ -44,7 +44,7 @@
                         </li>
 
                         <li>
-                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> About </a>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                         </li>
                     </ul>
                 </nav>

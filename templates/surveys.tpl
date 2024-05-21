@@ -45,7 +45,7 @@
                             </li>
 
                             <li>
-                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> About </a>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                             </li>
                         </ul>
                     </nav>
@@ -91,7 +91,7 @@
             </p>
         </div>
     </section>
-    <section class="flex flex-col h-3/4 justify-between">
+    <section class="flex flex-col h-3/4">
 
         <?php if($admin): ?>
             <div class="flex justify-around items-center pl-4">
@@ -140,7 +140,7 @@
             <div>
                 <section class=" max-w-screen-lg mx-auto px-4 md:px-8">
                     <ul class="space-y-6">
-                        <?php foreach ($questionari as $questionaro): ?>
+                        <?php foreach ($questionari as $questionario): ?>
                             <li class="p-5 bg-white rounded-md shadow-md">
                                 <a>
                                     <div>
@@ -198,7 +198,7 @@
                                                 >
                                                 <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                                                    <span> <?= $questionario['autore'] ?> </span>
+                                                    <span> <?= $questionario['nome'] . ' ' . $questionario['cognome'] ?> </span>
                                             </span>
                                         </div>
                                     </div>

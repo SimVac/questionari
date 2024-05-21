@@ -71,10 +71,10 @@
     if (isset($_GET['action'])){
         if ($_GET['action'] == 'surveys'){
             $questionari = QuestionarioRepository::getQuestionari();
+
             foreach ($questionari as $questionario){
                 $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0], $_SESSION['user']['id'])) > 0;
             }
-
             echo $template->render('surveys', [
                 'questionari'=>$questionari,
                 'admin' => $_SESSION['user']['ruolo'] == 'admin',
@@ -92,6 +92,11 @@
         }
         if ($_GET['action'] == 'compile'){
             echo $template->render('compila');
+            exit(0);
+        }
+        if($_GET['action'] == 'about'){
+            echo $template->render('about',[
+                'logged'=>isset($_SESSION['user'])]);
             exit(0);
         }
     }

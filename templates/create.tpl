@@ -45,7 +45,7 @@
                         </li>
 
                         <li>
-                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> About </a>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                         </li>
                     </ul>
                 </nav>
@@ -123,10 +123,10 @@
         <div class="w-6/12">
                 <label for="OrderNotes" class="sr-only">Order notes</label>
 
-                <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md">
                     <textarea
                         id="newQuestion"
-                        class="w-full resize-none border-none align-top focus:ring-0 sm:text-sm p-4"
+                        class="w-full resize-none border-none align-top sm:text-sm p-4"
                         rows="4"
                         placeholder="Enter a question..."
                     ></textarea>
@@ -172,6 +172,6 @@
         </div>
     </div>
 </section>
-<script src="scripts/create.js"></script>
+<script src="/scripts/create.js"></script>
 </body>
 </html>
