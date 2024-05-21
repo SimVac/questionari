@@ -77,7 +77,7 @@
                                 type="text"
                                 id="FirstName"
                                 name="nome"
-                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-md"
                                 required
                         />
                     </div>
@@ -91,7 +91,7 @@
                                 type="text"
                                 id="LastName"
                                 name="cognome"
-                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-md"
                                 required
                         />
                     </div>
@@ -103,7 +103,7 @@
                                 type="email"
                                 id="Email"
                                 name="mail"
-                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-md"
                                 required
                         />
                     </div>
@@ -115,7 +115,7 @@
                                 type="password"
                                 id="Password"
                                 name="password"
-                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-sm"
+                                class="w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-md"
                                 required
                         />
                     </div>
@@ -129,7 +129,7 @@
                                 type="password"
                                 id="PasswordConfirmation"
                                 name="password_confirmation"
-                                class="peer w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-sm"
+                                class="peer w-full rounded-lg border-gray-200 p-3 pe-12 text-sm text-gray-700 shadow-md"
                                 required
                         />
                         <label for="PasswordConfirmation" class="mt-2 text-pink-600 text-sm invisible" id="error">
@@ -173,7 +173,7 @@
 
                         <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             Already have an account?
-                            <a href="index.php" class="text-gray-700 underline">Log in</a>.
+                            <a href="index.php?action=login" class="text-gray-700 underline">Log in</a>.
                         </p>
                     </div>
                     <div class="col-span-6 sm:flex sm:items-center sm:gap-4">

@@ -22,6 +22,10 @@
 
     // GET section
     if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'login'){
+            echo $template ->render('login');
+            exit(0);
+        }
         if ($_GET['action'] == 'logout'){
             Authenticator::logout();
             page_refresh();
@@ -32,7 +36,6 @@
             exit(0);
         }
     }
-
 
 
     // POST section
@@ -59,8 +62,43 @@
     }
 
     if ($user == null){
-        echo $template->render('login');
+        echo $template->render('index', [
+            'logged'=>false
+        ]);
         exit(0);
+    }
+
+    if (isset($_GET['action'])){
+        if ($_GET['action'] == 'surveys'){
+            $questionari = QuestionarioRepository::getQuestionari();
+
+            foreach ($questionari as $questionario){
+                $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0], $_SESSION['user']['id'])) > 0;
+            }
+            echo $template->render('surveys', [
+                'questionari'=>$questionari,
+                'admin' => $_SESSION['user']['ruolo'] == 'admin',
+                'logged'=>true
+            ]);
+            exit(0);
+        }
+        if ($_GET['action'] == 'profile'){
+            echo $template->render('profile');
+            exit(0);
+        }
+        if ($_GET['action'] == 'create'){
+            echo $template->render('create');
+            exit(0);
+        }
+        if ($_GET['action'] == 'compile'){
+            echo $template->render('compila');
+            exit(0);
+        }
+        if($_GET['action'] == 'about'){
+            echo $template->render('about',[
+                'logged'=>isset($_SESSION['user'])]);
+            exit(0);
+        }
     }
 
     if (isset($_POST['aggiunta-questionario'])){
@@ -101,13 +139,8 @@
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
 
-    $questionari = QuestionarioRepository::getQuestionari();
-    foreach ($questionari as $questionario){
-        $questionario['completato'] = sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])) > 0;
-    }
-
-    echo $template->render('surveys', [
-        'questionari'=>$questionari
+    echo $template->render('index', [
+        'logged'=>isset($_SESSION['user'])
     ]);
 
 
