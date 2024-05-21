@@ -103,7 +103,7 @@
                         <p class="pl-4">Question n <?= $i ?> </p>
                     </div>
                     <div>
-                        <p class="p-4 text-lg w-full break-all "> <?= domanda['testo'] ?> </p>
+                        <p class="p-4 text-lg w-full break-all "> <?= $domanda['testo'] ?> </p>
                     </div>
                     <div class="relative pl-4 pr-4 pb-4">
                         <label for="labels-range-input" class="sr-only">Labels range</label>
