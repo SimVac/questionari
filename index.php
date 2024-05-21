@@ -90,7 +90,10 @@
             echo $template->render('create');
             exit(0);
         }
-
+        if ($_GET['action'] == 'compile'){
+            echo $template->render('compila');
+            exit(0);
+        }
     }
 
     if (isset($_POST['aggiunta-questionario'])){
