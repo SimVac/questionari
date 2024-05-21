@@ -83,26 +83,44 @@
 </header>
 
 <section>
-    <div>
+    <div class="flex flex-col justify-between">
 
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
-                <p>Question n1</p>
+        <section class="h-40 flex justify-center items-center ">
+            <div class="flex flex-col justify-evenly h-full">
+                <h1 class="text-center text-4xl font-bold text-orange-500">Title</h1>
+                <p class="mx-auto max-w-xl text-center text-gray-500 text-2xl">
+                    Description
+                </p>
             </div>
-            <div id="defaultTabContent">
-                Domanda
+        </section>
+
+        <div class="flex flex-col items-center">
+            <div class="w-6/12 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="h-10 flex flex-wrap items-center text-md font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+                    <p class="pl-4">Question n1</p>
+                </div>
+                <div>
+                    <p class="p-4 text-lg w-full break-all "> Domanda </p>
+                </div>
+                <div class="relative pl-4 pr-4 pb-4">
+                    <label for="labels-range-input" class="sr-only">Labels range</label>
+                    <input id="labels-range-input" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                    <div class="w-full flex justify-between pt-4">
+                        <?php for ($i=1; $i < 8; $i+=1): ?>
+                            <span class="text-sm text-gray-500 dark:text-gray-400 -bottom-6"> <?= $i ?> </span>
+                        <?php endfor; ?>
+                    </div>
+                </div>
             </div>
-            <div class="relative mb-6">
-                <label for="labels-range-input" class="sr-only">Labels range</label>
-                <input id="labels-range-input" type="range" value="1000" min="100" max="1500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ($100)</span>
-                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
-                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span>
-                <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ($1500)</span>
+            <div class="pt-6">
+                <button class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500"
+                >
+                    Send!
+                </button>
             </div>
         </div>
-
     </div>
+
 </section>
 
 </body>

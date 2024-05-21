@@ -150,7 +150,7 @@
     <div class="flex flex-col items-center justify-evenly h-fit">
         <div class="h-fit w-6/12 pt-8 pb-2">
             <div class="flex justify-between max-w-3xl pb-4">
-                <p class="block text-xl font-medium max-w-md text-gray-700"> 1. Question </p>
+                <p class="block text-xl font-medium max-w-md text-gray-700 break-all"> 1. Question </p>
                 <button>
                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2.75C11.0215 2.75 10.1871 3.37503 9.87787 4.24993C9.73983 4.64047 9.31134 4.84517 8.9208 4.70713C8.53026 4.56909 8.32557 4.1406 8.46361 3.75007C8.97804 2.29459 10.3661 1.25 12 1.25C13.634 1.25 15.022 2.29459 15.5365 3.75007C15.6745 4.1406 15.4698 4.56909 15.0793 4.70713C14.6887 4.84517 14.2602 4.64047 14.1222 4.24993C13.813 3.37503 12.9785 2.75 12 2.75Z" fill="#1C274C"/>
