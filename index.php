@@ -113,6 +113,7 @@
                     ]);
                     exit(0);
                 }
+                $questionario = $questionario[0];
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
                 echo $template->render('compila', [
                     'questionario' => $questionario,
@@ -126,6 +127,26 @@
 
             exit(0);
         }
+        if($_GET['action'] == 'graphs'){
+            $questionari = QuestionarioRepository::getQuestionari();
+            foreach ($questionari as &$questionario) {
+                $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
+                $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+                $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
+            }
+            var_dump($questionari);
+            echo $template->render('graph',[
+                'logged'=>isset($_SESSION['user']),
+                'questionari' => $questionari
+            ]);
+            exit(0);
+        }
+    }
+    if (isset($_POST['modifica-bio'])){
+        UtenteRepository::editBio($_POST['bio'], $_SESSION['user']['id']);
+    }
+    if (isset($_POST['modifica-dati'])){
+        UtenteRepository::editData($_POST['gender'], $_POST['birthday'], $_POST['city'], $_SESSION['user']['id']);
     }
 
     if (isset($_POST['aggiunta-questionario'])){

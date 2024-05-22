@@ -16,7 +16,7 @@
 
             <img
                     alt=""
-                    src="../img/aestethic.jpg"
+                    src="img/aestethic.jpg"
                     class="absolute inset-0 h-full w-full object-cover opacity-80"
             />
 

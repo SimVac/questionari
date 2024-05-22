@@ -9,7 +9,7 @@
     <title>Survey</title>
 </head>
 <body>
-<header class="bg-orange-500 h-fit">
+<header class="bg-orange-500">
     <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
         <div class="flex flex w-1/4 justify-between items-center">
             <a class="block text-teal-600" href="index.php">
@@ -40,11 +40,7 @@
                         </li>
 
                         <li>
-                            <?php if(!$logged) : ?>
-                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
-                            <?php else: ?>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
-                            <?php endif; ?>
                         </li>
 
                         <li>
@@ -58,24 +54,6 @@
                 </nav>
 
                 <div class="flex items-center gap-4">
-                    <?php if (!$logged): ?>
-                    <div class="sm:flex sm:gap-4">
-                        <div class="hidden sm:flex">
-                            <a
-                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
-                                    href="index.php?action=login"
-                            >
-                                Login
-                            </a>
-                        </div>
-                        <a
-                                class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                                href="index.php?action=registrazione"
-                        >
-                            Register
-                        </a>
-                    </div>
-                    <?php else: ?>
                     <a href="index.php?action=profile">
                         <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +65,7 @@
                                   fill="#E5594F"/>
                         </svg>
                     </a>
-                    <?php endif; ?>
+
                     <div class="block md:hidden">
                         <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                             <svg

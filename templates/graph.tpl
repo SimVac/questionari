@@ -9,7 +9,11 @@
     <title>Survey</title>
 </head>
 <body>
+<<<<<<< HEAD
 <header class="bg-orange-500 h-fit">
+=======
+<header class="bg-orange-500">
+>>>>>>> dev
     <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
         <div class="flex flex w-1/4 justify-between items-center">
             <a class="block text-teal-600" href="index.php">
@@ -58,6 +62,7 @@
                 </nav>
 
                 <div class="flex items-center gap-4">
+
                     <?php if (!$logged): ?>
                     <div class="sm:flex sm:gap-4">
                         <div class="hidden sm:flex">
@@ -76,6 +81,7 @@
                         </a>
                     </div>
                     <?php else: ?>
+
                     <a href="index.php?action=profile">
                         <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +93,9 @@
                                   fill="#E5594F"/>
                         </svg>
                     </a>
+
                     <?php endif; ?>
+
                     <div class="block md:hidden">
                         <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                             <svg
@@ -107,8 +115,6 @@
         </div>
     </div>
 </header>
-
-
 
 </body>
 </html>
