@@ -69,5 +69,6 @@ function sendData(){
     fetch('index.php', {
         method: 'POST',
         body: form
-    }).then(() => window.location.replace('index.php?action=surveys'))
+    }).then()
+    window.location.replace('index.php?action=surveys')
 }
