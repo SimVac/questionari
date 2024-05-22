@@ -83,7 +83,16 @@
             exit(0);
         }
         if ($_GET['action'] == 'profile'){
-            echo $template->render('profile');
+            $questionari = QuestionarioRepository::getQuestionari();
+            $count = 0;
+            foreach ($questionari as &$questionario){
+                if (sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0]['id'], $_SESSION['user']['id'])) > 0)
+                    $count++;
+            }
+            echo $template->render('profile', [
+                'user' => $_SESSION['user'],
+                'count' => $count
+            ]);
             exit(0);
         }
         if ($_GET['action'] == 'create'){
@@ -131,6 +140,7 @@
     if (isset($_POST['compilazione-questionario'])){
         $risposte = json_decode($_POST['risposte']);
         $prima_domanda = DomandaRepository::getDomandeByQuestionarioId($risposte->idQuestionario)[0];
+        //hell nah
         if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
             exit(0);
         CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
