@@ -45,6 +45,9 @@
                             </li>
 
                             <li>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
+                            </li>
+                            <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                             </li>
                         </ul>
@@ -96,7 +99,7 @@
         <?php if($admin): ?>
             <div class="flex justify-around items-center pl-4">
             <div class="w-3/12">
-                <form class="max-w-sm mx-auto w-10/12 pl-4">
+                <div class="max-w-sm mx-auto w-10/12 pl-4">
                     <label for="default-search" class=" text-sm font-medium text-gray-900 sr-only">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -104,10 +107,10 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500" placeholder="Search survey..." required />
-                        <button onclick="searchSurveys()" type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                        <input type="search" id="search-surveys" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500" placeholder="Search survey..." required />
+                        <button onclick="searchSurveys()" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="w-2/12">
                 <div class="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">

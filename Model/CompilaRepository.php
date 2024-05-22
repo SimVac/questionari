@@ -41,4 +41,14 @@ class CompilaRepository
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getNumeroRisposte($idDomanda){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT COUNT(*) FROM compila WHERE idDomanda = :idDomanda';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'idDomanda' => $idDomanda
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

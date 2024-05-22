@@ -48,4 +48,18 @@ class QuestionarioRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public static function getMediaRisultati($idQuestionario){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT AVG(compila.risposta) as media, domanda.testo
+                FROM compila
+                         INNER JOIN domanda ON compila.idDomanda = domanda.id
+                WHERE domanda.idQuestionario = :id
+                GROUP BY domanda.id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $idQuestionario
+        ]);
+        return $stmt->fetchAll();
+    }
 }
