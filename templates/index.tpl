@@ -129,32 +129,32 @@
 
         <div class="bg-neutral-50 flex justify-center items-center h-2/6">
             <div class="flex flex-row justify-around w-10/12 h-5/6 items-center">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
                     </svg>
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Need a help in QuestionAPP?</h5>
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Need a help in QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Don't worry it's really easy and intuitive, you won't have any problems :)</p>
+                    <p class="mb-3 font-normal text-gray-700">Don't worry it's really easy and intuitive, you won't have any problems :)</p>
                 </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
                     </svg>
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Why QuestionAPP?</h5>
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Why QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Because our website has a modern layout and it's users friendly</p>
+                    <p class="mb-3 font-normal text-gray-700">Because our website has a modern layout and it's users friendly</p>
                 </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <svg class="w-7 h-7 text-red-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
                     </svg>
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600 dark:text-white">Contact us</h5>
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Contact us</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">If you need any help you can contact us in the about page, we will answer ASAP</p>
+                    <p class="mb-3 font-normal text-gray-700">If you need any help you can contact us in the about page, we will answer ASAP</p>
                 </div>
             </div>
         </div>

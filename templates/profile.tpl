@@ -83,7 +83,7 @@
 </header>
 <section>
         <div class="flex flex-row justify-evenly items-center h-[90vh]">
-            <div class="rounded-lg p-4 shadow-lg flex flex-col items-center justify-evenly w-fit h-fit">
+            <div class="rounded-lg p-4 shadow-lg flex flex-col items-center justify-evenly w-3/12 h-4/6">
                 <div class="pt-4">
                     <svg width="5rem" height="5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +99,7 @@
                 <div class="pt-4">
                     <span class="text-xl text-gray-600">Nome Cognome</span>
                 </div>
-                <div class="w-full pt-3">
+                <div class="w-full pt-3 ">
                     <label for="OrderNotes" class="block text-sm font-medium text-gray-500"> Bio </label>
 
                     <textarea

@@ -94,32 +94,32 @@
                 </div>
             </section>
 
-            <?php $i = 0 ?>
+            <?php $j = 0 ?>
             <?php foreach($domande as $domanda): ?>
-            <?php $i += 1 ?>
-                <div class="flex flex-col items-center">
-                <div class="w-6/12 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div class="h-10 flex flex-wrap items-center text-md font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
-                        <p class="pl-4">Question n <?= $i ?> </p>
+            <?php $j += 1 ?>
+                <div class="flex flex-col items-center p-4">
+                <div class="w-6/12 bg-white border border-gray-200 rounded-lg shadow">
+                    <div class="h-10 flex flex-wrap items-center text-md font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50">
+                        <p class="pl-4">Question n <?= $j ?> </p>
                     </div>
                     <div>
                         <p class="p-4 text-lg w-full break-all "> <?= $domanda['testo'] ?> </p>
                     </div>
                     <div class="relative pl-4 pr-4 pb-4">
                         <label for="labels-range-input" class="sr-only">Labels range</label>
-                        <input id="labels-range-input" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                        <input id="labels-range-input" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                         <div class="w-full flex justify-between pt-4">
                             <?php for ($i=1; $i < 8; $i+=1): ?>
-                                <span class="text-sm text-gray-500 dark:text-gray-400 -bottom-6"> <?= $i ?> </span>
+                                <span class="text-sm text-gray-500 -bottom-6"> <?= $i ?> </span>
                             <?php endfor; ?>
                         </div>
                     </div>
                 </div>
-                <div class="pt-6">
-                    <input type="submit" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" value="Send!">
-                </div>
             </div>
             <?php endforeach; ?>
+            <div class="p-6 w-full flex justify-center items-center">
+                <input type="submit" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" value="Send!">
+            </div>
         </div>
     </form>
 

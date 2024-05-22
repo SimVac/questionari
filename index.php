@@ -35,6 +35,11 @@
             echo $template->render('registrazione');
             exit(0);
         }
+        if($_GET['action'] == 'about'){
+            echo $template->render('about',[
+                'logged'=>isset($_SESSION['user'])]);
+            exit(0);
+        }
     }
 
 
@@ -92,21 +97,24 @@
         }
         if ($_GET['action'] == 'compile'){
             if (isset($_GET['q'])){
-                $questionario = QuestionarioRepository::getQuestionarioById($_GET['q'])[0];
+                $questionario = QuestionarioRepository::getQuestionarioById($_GET['q']);
+                if (sizeof($questionario) <= 0){
+                    echo $template->render('error', [
+                        'logged' => isset($_SESSION['user'])
+                    ]);
+                    exit(0);
+                }
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
                 echo $template->render('compila', [
                     'questionario' => $questionario,
                     'domande' => $domande
                 ]);
             }else{
-                echo $template->render('error');
+                echo $template->render('error', [
+                    'logged' => isset($_SESSION['user'])
+                ]);
             }
 
-            exit(0);
-        }
-        if($_GET['action'] == 'about'){
-            echo $template->render('about',[
-                'logged'=>isset($_SESSION['user'])]);
             exit(0);
         }
     }
