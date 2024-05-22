@@ -35,6 +35,11 @@
             echo $template->render('registrazione');
             exit(0);
         }
+        if($_GET['action'] == 'about'){
+            echo $template->render('about',[
+                'logged'=>isset($_SESSION['user'])]);
+            exit(0);
+        }
     }
 
 
@@ -83,7 +88,16 @@
             exit(0);
         }
         if ($_GET['action'] == 'profile'){
-            echo $template->render('profile');
+            $questionari = QuestionarioRepository::getQuestionari();
+            $count = 0;
+            foreach ($questionari as &$questionario){
+                if (sizeof(CompilaRepository::getRispostaByIdDomanda(DomandaRepository::getDomandeByQuestionarioId($questionario['id'])[0]['id'], $_SESSION['user']['id'])) > 0)
+                    $count++;
+            }
+            echo $template->render('profile', [
+                'user' => $_SESSION['user'],
+                'count' => $count
+            ]);
             exit(0);
         }
         if ($_GET['action'] == 'create'){
@@ -92,21 +106,24 @@
         }
         if ($_GET['action'] == 'compile'){
             if (isset($_GET['q'])){
-                $questionario = QuestionarioRepository::getQuestionarioById($_GET['q'])[0];
+                $questionario = QuestionarioRepository::getQuestionarioById($_GET['q']);
+                if (sizeof($questionario) <= 0){
+                    echo $template->render('error', [
+                        'logged' => isset($_SESSION['user'])
+                    ]);
+                    exit(0);
+                }
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
                 echo $template->render('compila', [
                     'questionario' => $questionario,
                     'domande' => $domande
                 ]);
             }else{
-                echo $template->render('error');
+                echo $template->render('error', [
+                    'logged' => isset($_SESSION['user'])
+                ]);
             }
 
-            exit(0);
-        }
-        if($_GET['action'] == 'about'){
-            echo $template->render('about',[
-                'logged'=>isset($_SESSION['user'])]);
             exit(0);
         }
     }
@@ -131,6 +148,7 @@
     if (isset($_POST['compilazione-questionario'])){
         $risposte = json_decode($_POST['risposte']);
         $prima_domanda = DomandaRepository::getDomandeByQuestionarioId($risposte->idQuestionario)[0];
+        //hell nah
         if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
             exit(0);
         CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);

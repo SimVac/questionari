@@ -7,7 +7,7 @@ use Util\Connection;
 class UtenteRepository{
     public static function userAuthentication(string $mail, string $password):array|null{
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM utente INNER JOIN ruolo ON utente.idRuolo = ruolo.id WHERE mail=:mail';
+        $sql = 'SELECT utente.*, ruolo.ruolo FROM utente INNER JOIN ruolo ON utente.idRuolo = ruolo.id WHERE mail=:mail';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
                 'mail' => $mail
@@ -23,7 +23,7 @@ class UtenteRepository{
 
     public static function userRegistration(string $mail, string $password, string $nome, string $cognome):void{
         $pdo = Connection::getInstance();
-        $sql = 'INSERT INTO utente (mail, password, nome, cognome, idRuolo) VALUES (:mail, :password, :nome, :cognome, 2)';
+        $sql = 'INSERT INTO utente (mail, password, nome, cognome, subscriptionDate, idRuolo) VALUES (:mail, :password, :nome, :cognome, CURRENT_DATE(), 2)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
                 'mail' => $mail,
@@ -39,6 +39,17 @@ class UtenteRepository{
         $sql = 'SELECT * FROM utente';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public static function editBio(string $bio, $idUtente){
+        $pdo = Connection::getInstance();
+        $sql = 'UPDATE utente SET bio = :bio WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'bio' => $bio,
+            'id' => $idUtente
+        ]);
         return $stmt->fetchAll();
     }
 }

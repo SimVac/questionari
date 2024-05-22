@@ -83,7 +83,7 @@
 </header>
 <section>
         <div class="flex flex-row justify-evenly items-center h-[90vh]">
-            <div class="rounded-lg p-4 shadow-lg flex flex-col items-center justify-evenly w-fit h-fit">
+            <div class="rounded-lg p-4 shadow-lg flex flex-col items-center justify-evenly w-3/12 h-4/6">
                 <div class="pt-4">
                     <svg width="5rem" height="5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -97,9 +97,9 @@
                 </div>
 
                 <div class="pt-4">
-                    <span class="text-xl text-gray-600">Nome Cognome</span>
+                    <span class="text-xl text-gray-600"><?= $user['nome'] . ' ' . $user['cognome'] ?></span>
                 </div>
-                <div class="w-full pt-3">
+                <div class="w-full pt-3 ">
                     <label for="OrderNotes" class="block text-sm font-medium text-gray-500"> Bio </label>
 
                     <textarea
@@ -107,7 +107,7 @@
                             class=" p-2 mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
                             rows="4"
                             placeholder="Enter any additional order notes..."
-                    ></textarea>
+                    ><?= $user['bio'] ?></textarea>
                 </div>
 
                 <div class="flex justify-between w-full">
@@ -128,25 +128,25 @@
                 <div class="rounded-lg p-4 shadow-lg flex  justify-between  w-full">
                     <div class="flex flex-col items-start">
                         <span class="text-2xl font-bold text-orange-500">Email</span>
-                        <span class="text-xl text-gray-600">prova@gmail.com</span>
+                        <span class="text-xl text-gray-600"><?= $user['mail'] ?></span>
                     </div>
-                    <button class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
+                    <!-- <button class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
                         Edit
-                    </button>
+                    </button> -->
                 </div>
                 <div class="flex flex-row justify-between items-center w-full h-4/6">
                     <div class="rounded-lg p-4 shadow-lg flex flex-col justify-around items-start w-5/12 h-full">
                         <span class="text-2xl font-bold text-orange-500">Subscrition date</span>
-                        <span class="text-xl text-gray-600">Data</span>
-                        <span class="text-2xl font-bold text-orange-500">Number of survey answered</span>
-                        <span class="text-xl text-gray-600">number</span>
+                        <span class="text-xl text-gray-600"><?= $user['subscriptionDate'] ?></span>
+                        <span class="text-2xl font-bold text-orange-500">Number of surveys answered</span>
+                        <span class="text-xl text-gray-600"><?= $count ?></span>
                     </div>
                     <div class="rounded-lg p-4 shadow-lg flex flex-col justify-around items-start w-5/12 h-full">
-                        <div class="flex flex-col justify-around">
+                        <div class="flex flex-col justify-around h-4/6">
                             <span class="text-2xl font-bold text-orange-500 pb-2">Personal info</span>
-                            <span class="text-xl text-gray-600">Gender: </span>
-                            <span class="text-xl text-gray-600">Birthday: </span>
-                            <span class="text-xl text-gray-600">City: </span>
+                            <span class="text-xl text-gray-600">Gender: <?= $user['gender'] ?></span>
+                            <span class="text-xl text-gray-600">Birthday: <?= $user['birthday'] ?></span>
+                            <span class="text-xl text-gray-600">City: <?= $user['city'] ?></span>
                         </div>
 
                         <div class="pt-3">
