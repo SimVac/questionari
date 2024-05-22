@@ -45,6 +45,9 @@
                             </li>
 
                             <li>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
+                            </li>
+                            <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                             </li>
                         </ul>

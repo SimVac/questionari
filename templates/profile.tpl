@@ -44,13 +44,16 @@
                         </li>
 
                         <li>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
+                        </li>
+                        <li>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                         </li>
                     </ul>
                 </nav>
 
                 <div class="flex items-center gap-4">
-                    <a href="#">
+                    <a href="index.php?action=profile">
                         <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M691.573 338.89c-1.282 109.275-89.055 197.047-198.33 198.331-109.292 1.282-197.065-90.984-198.325-198.331-0.809-68.918-107.758-68.998-106.948 0 1.968 167.591 137.681 303.31 305.272 305.278C660.85 646.136 796.587 503.52 798.521 338.89c0.811-68.998-106.136-68.918-106.948 0z"

@@ -40,6 +40,11 @@
                 'logged'=>isset($_SESSION['user'])]);
             exit(0);
         }
+        if($_GET['action'] == 'graphs'){
+            echo $template->render('graph',[
+                'logged'=>isset($_SESSION['user'])]);
+            exit(0);
+        }
     }
 
 
