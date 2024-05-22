@@ -99,11 +99,11 @@
                 <div class="pt-4">
                     <span class="text-xl text-gray-600"><?= $user['nome'] . ' ' . $user['cognome'] ?></span>
                 </div>
-                <div class="w-full pt-3 ">
-                    <label for="OrderNotes" class="block text-sm font-medium text-gray-500"> Bio </label>
+                <div class="w-full pt-3">
+                    <label for="bio" class="block text-sm font-medium text-gray-500"> Bio </label>
 
                     <textarea
-                            id="OrderNotes"
+                            id="bio"
                             class=" p-2 mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
                             rows="4"
                             placeholder="Enter any additional order notes..."
@@ -112,7 +112,7 @@
 
                 <div class="flex justify-between w-full">
                     <div class="p-3">
-                        <button class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
+                        <button onclick="sendBio()" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
                             Edit Bio
                         </button>
                     </div>
@@ -144,13 +144,13 @@
                     <div class="rounded-lg p-4 shadow-lg flex flex-col justify-around items-start w-5/12 h-full">
                         <div class="flex flex-col justify-around h-4/6">
                             <span class="text-2xl font-bold text-orange-500 pb-2">Personal info</span>
-                            <span class="text-xl text-gray-600">Gender: <?= $user['gender'] ?></span>
-                            <span class="text-xl text-gray-600">Birthday: <?= $user['birthday'] ?></span>
-                            <span class="text-xl text-gray-600">City: <?= $user['city'] ?></span>
+                            <span id="gender" class="text-xl text-gray-600">Gender: <?= $user['gender'] ?></span>
+                            <span id="birthday" class="text-xl text-gray-600">Birthday: <?= $user['birthday'] ?></span>
+                            <span id="city" class="text-xl text-gray-600">City: <?= $user['city'] ?></span>
                         </div>
 
                         <div class="pt-3">
-                            <button class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
+                            <button id="btnEdit" onclick="prepareData()" class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
                                 Edit
                             </button>
                         </div>
@@ -160,5 +160,43 @@
             </div>
         </div>
 </section>
+
+<script>
+    function sendBio(){
+        let bio = document.getElementById('bio').value
+        let data = new FormData();
+        data.append('modifica-bio', '');
+        data.append('bio', bio);
+        fetch('index.php', {
+            method: 'POST',
+            body: data
+        }).then()
+    }
+
+    function sendData(){
+        let data = new FormData();
+        data.append('modifica-dati', '');
+        data.append('gender', document.getElementById('gender').value);
+        data.append('birthday', document.getElementById('birthday').value);
+        data.append('city', document.getElementById('city').value);
+        fetch('index.php', {
+            method: 'POST',
+            body: data
+        }).then(() => window.location.reload())
+    }
+
+    function prepareData(){
+        let gender = document.getElementById('gender');
+        let g = gender.textContent.split(' ')[1]
+        gender.outerHTML = `<select id='gender'><option ${g === 'Male' ? 'selected' : ''}>Male</option><option ${g === 'Female' ? 'selected' : ''}>Female</option></select>`
+        let birthday = document.getElementById('birthday');
+        birthday.outerHTML = `<input id='birthday' type='date' value='${birthday.textContent.split(' ')[1]}'>`;
+        let city = document.getElementById('city');
+        city.outerHTML = `<input id='city' type='text' value='${city.textContent.split(' ')[1]}'>`
+
+        let button = document.getElementById('btnEdit')
+        button.onclick = sendData;
+    }
+</script>
 </body>
 </html>
