@@ -9,7 +9,7 @@
     <title>Survey</title>
 </head>
 <body>
-<header class="bg-orange-500">
+<header class="bg-orange-500 h-fit">
     <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
         <div class="flex flex w-1/4 justify-between items-center">
             <a class="block text-teal-600" href="index.php">
@@ -40,7 +40,11 @@
                         </li>
 
                         <li>
+                            <?php if(!$logged) : ?>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
+                            <?php else: ?>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
+                            <?php endif; ?>
                         </li>
 
                         <li>
@@ -54,6 +58,7 @@
                 </nav>
 
                 <div class="flex items-center gap-4">
+                    <?php if (!$logged): ?>
                     <div class="sm:flex sm:gap-4">
                         <div class="hidden sm:flex">
                             <a
@@ -70,6 +75,19 @@
                             Register
                         </a>
                     </div>
+                    <?php else: ?>
+                    <a href="index.php?action=profile">
+                        <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M691.573 338.89c-1.282 109.275-89.055 197.047-198.33 198.331-109.292 1.282-197.065-90.984-198.325-198.331-0.809-68.918-107.758-68.998-106.948 0 1.968 167.591 137.681 303.31 305.272 305.278C660.85 646.136 796.587 503.52 798.521 338.89c0.811-68.998-106.136-68.918-106.948 0z"
+                                  fill="#4A5699"/>
+                            <path d="M294.918 325.158c1.283-109.272 89.051-197.047 198.325-198.33 109.292-1.283 197.068 90.983 198.33 198.33 0.812 68.919 107.759 68.998 106.948 0C796.555 157.567 660.839 21.842 493.243 19.88c-167.604-1.963-303.341 140.65-305.272 305.278-0.811 68.998 106.139 68.919 106.947 0z"
+                                  fill="#C45FA0"/>
+                            <path d="M222.324 959.994c0.65-74.688 29.145-144.534 80.868-197.979 53.219-54.995 126.117-84.134 201.904-84.794 74.199-0.646 145.202 29.791 197.979 80.867 54.995 53.219 84.13 126.119 84.79 201.905 0.603 68.932 107.549 68.99 106.947 0-1.857-213.527-176.184-387.865-389.716-389.721-213.551-1.854-387.885 178.986-389.721 389.721-0.601 68.991 106.349 68.933 106.949 0.001z"
+                                  fill="#E5594F"/>
+                        </svg>
+                    </a>
+                    <?php endif; ?>
                     <div class="block md:hidden">
                         <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                             <svg
@@ -89,119 +107,8 @@
         </div>
     </div>
 </header>
-<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-lg">
-        <h1 class="text-center text-2xl font-bold text-orange-500 sm:text-3xl">Welcome to QuestionAPP</h1>
-
-        <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
-            Enter now and start filling out any type of survey.
-        </p>
 
 
-        <div class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-            <form action="index.php" method="post" class="mb-0 mt-6 space-y-4" onsubmit="loginForm(event)" id="form">
-                <p class="text-center text-lg font-medium">Sign in to your account</p>
 
-                <div>
-                    <label for="email" class="sr-only">Email</label>
-
-                    <div class="relative">
-                        <input
-                                type="email"
-                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
-                                placeholder="Enter email"
-                                name="mail"
-                                required
-                        />
-
-                        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-            >
-              <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-              />
-            </svg>
-          </span>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="password" class="sr-only">Password</label>
-
-                    <div class="relative">
-                        <input
-                                type="password"
-                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
-                                placeholder="Enter password"
-                                name="password"
-                                required
-                        />
-
-                        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-            >
-              <!-- <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              /> -->
-              <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 9H15.01M15 15C18.3137 15 21 12.3137 21 9C21 5.68629 18.3137 3 15 3C11.6863 3 9 5.68629 9 9C9 9.27368 9.01832 9.54308 9.05381 9.80704C9.11218 10.2412 9.14136 10.4583 9.12172 10.5956C9.10125 10.7387 9.0752 10.8157 9.00469 10.9419C8.937 11.063 8.81771 11.1823 8.57913 11.4209L3.46863 16.5314C3.29568 16.7043 3.2092 16.7908 3.14736 16.8917C3.09253 16.9812 3.05213 17.0787 3.02763 17.1808C3 17.2959 3 17.4182 3 17.6627V19.4C3 19.9601 3 20.2401 3.10899 20.454C3.20487 20.6422 3.35785 20.7951 3.54601 20.891C3.75992 21 4.03995 21 4.6 21H6.33726C6.58185 21 6.70414 21 6.81923 20.9724C6.92127 20.9479 7.01881 20.9075 7.10828 20.8526C7.2092 20.7908 7.29568 20.7043 7.46863 20.5314L12.5791 15.4209C12.8177 15.1823 12.937 15.063 13.0581 14.9953C13.1843 14.9248 13.2613 14.8987 13.4044 14.8783C13.5417 14.8586 13.7588 14.8878 14.193 14.9462C14.4569 14.9817 14.7263 15 15 15Z"
-              />
-            </svg>
-          </span>
-                    </div>
-                </div>
-
-                <button
-                        type="submit"
-                        class="block w-full rounded-lg bg-orange-500 px-5 py-3 text-sm font-medium text-white"
-                >
-                    Sign in
-                </button>
-            </form>
-
-            <p class="text-center text-sm text-gray-500">
-                No account?
-                <a class="underline" href="index.php?action=registrazione"> Sign up </a>
-            </p>
-
-        </div>
-    </div>
-</div>
-<script>
-    console.log(localStorage['page'] ? ("index.php?action=" + localStorage['page']) : "index.php")
-
-    function loginForm(event){
-        event.preventDefault();
-
-        const formData = new FormData(document.getElementById('form'));
-
-        fetch('index.php', {
-            method: "POST",
-            body: formData
-        }).then(() => {
-            window.location.replace(localStorage['page'] ? ("index.php?action=" + localStorage['page']) : "index.php");
-            localStorage.removeItem('page');
-        })
-    }
-</script>
 </body>
 </html>
