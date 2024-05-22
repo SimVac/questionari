@@ -42,7 +42,17 @@ class UtenteRepository{
         return $stmt->fetchAll();
     }
 
-    public static function editBio(string $bio, $idUtente){
+    public static function getUtenteById(int $id){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM utente WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id
+        ]);
+        return $stmt->fetchAll()[0];
+    }
+
+    public static function editBio(string $bio, int $idUtente){
         $pdo = Connection::getInstance();
         $sql = 'UPDATE utente SET bio = :bio WHERE id = :id';
         $stmt = $pdo->prepare($sql);
@@ -50,6 +60,21 @@ class UtenteRepository{
             'bio' => $bio,
             'id' => $idUtente
         ]);
-        return $stmt->fetchAll();
+        $stmt->fetchAll();
+        $_SESSION['user'] = self::getUtenteById($_SESSION['user']['id']);
+    }
+
+    public static function editData(string $gender, string $birthday, string $city, int $idUtente){
+        $pdo = Connection::getInstance();
+        $sql = 'UPDATE utente SET gender = :gender, birthday = :birthday, city = :city WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'gender'=> $gender,
+            'birthday'=> $birthday,
+            'city'=> $city,
+            'id' => $idUtente
+        ]);
+        $stmt->fetchAll();
+        $_SESSION['user'] = self::getUtenteById($_SESSION['user']['id']);
     }
 }

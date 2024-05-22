@@ -127,6 +127,12 @@
             exit(0);
         }
     }
+    if (isset($_POST['modifica-bio'])){
+        UtenteRepository::editBio($_POST['bio'], $_SESSION['user']['id']);
+    }
+    if (isset($_POST['modifica-dati'])){
+        UtenteRepository::editData($_POST['gender'], $_POST['birthday'], $_POST['city'], $_SESSION['user']['id']);
+    }
 
     if (isset($_POST['aggiunta-questionario'])){
         if ($_SESSION['user']['ruolo'] != 'admin') {
