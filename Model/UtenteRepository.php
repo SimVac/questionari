@@ -23,7 +23,7 @@ class UtenteRepository{
 
     public static function userRegistration(string $mail, string $password, string $nome, string $cognome):void{
         $pdo = Connection::getInstance();
-        $sql = 'INSERT INTO utente (mail, password, nome, cognome, idRuolo) VALUES (:mail, :password, :nome, :cognome, 2)';
+        $sql = 'INSERT INTO utente (mail, password, nome, cognome, subscriptionDate, idRuolo) VALUES (:mail, :password, :nome, :cognome, CURRENT_DATE(), 2)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
                 'mail' => $mail,

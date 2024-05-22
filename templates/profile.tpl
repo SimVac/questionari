@@ -130,19 +130,19 @@
                         <span class="text-2xl font-bold text-orange-500">Email</span>
                         <span class="text-xl text-gray-600"><?= $user['mail'] ?></span>
                     </div>
-                    <button class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
+                    <!-- <button class="h-fit inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
                         Edit
-                    </button>
+                    </button> -->
                 </div>
                 <div class="flex flex-row justify-between items-center w-full h-4/6">
                     <div class="rounded-lg p-4 shadow-lg flex flex-col justify-around items-start w-5/12 h-full">
                         <span class="text-2xl font-bold text-orange-500">Subscrition date</span>
                         <span class="text-xl text-gray-600"><?= $user['subscriptionDate'] ?></span>
-                        <span class="text-2xl font-bold text-orange-500">Number of survey answered</span>
+                        <span class="text-2xl font-bold text-orange-500">Number of surveys answered</span>
                         <span class="text-xl text-gray-600"><?= $count ?></span>
                     </div>
                     <div class="rounded-lg p-4 shadow-lg flex flex-col justify-around items-start w-5/12 h-full">
-                        <div class="flex flex-col justify-around">
+                        <div class="flex flex-col justify-around h-4/6">
                             <span class="text-2xl font-bold text-orange-500 pb-2">Personal info</span>
                             <span class="text-xl text-gray-600">Gender: <?= $user['gender'] ?></span>
                             <span class="text-xl text-gray-600">Birthday: <?= $user['birthday'] ?></span>

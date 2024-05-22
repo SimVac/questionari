@@ -105,7 +105,7 @@
                             </svg>
                         </div>
                         <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500" placeholder="Search survey..." required />
-                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                        <button onclick="searchSurveys()" type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                     </div>
                 </form>
             </div>
@@ -121,7 +121,7 @@
         </div>
         <?php else: ?>
             <div>
-                <form class="max-w-sm mx-auto w-10/12 pl-4">
+                <div class="max-w-sm mx-auto w-10/12 pl-4">
                     <label for="default-search" class=" text-sm font-medium text-gray-900 sr-only">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -129,17 +129,17 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500" placeholder="Search survey..." required />
-                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
+                        <input type="search" id="search-surveys" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500" placeholder="Search survey..." required />
+                        <button type="button" onclick="searchSurveys()" class="text-white absolute end-2.5 bottom-2.5 bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
                     </div>
-                </form>
+                </div>
             </div>
         <?php endif; ?>
 
         <div class="mt-4">
             <div>
                 <section class=" max-w-screen-lg mx-auto px-4 md:px-8">
-                    <ul class="space-y-6">
+                    <ul id="container" class="space-y-6">
                         <?php foreach ($questionari as $questionario): ?>
                             <li class="p-5 bg-white rounded-md shadow-md">
                                 <a>
@@ -213,5 +213,69 @@
     </section>
 
 </div>
+
+<script>
+    function searchSurveys(){
+        let questionari = JSON.parse('<?= json_encode($questionari)?>');
+        let ricerca = document.getElementById('search-surveys').value;
+        questionari = questionari.filter((questionario) => questionario.titolo.toLowerCase().includes(ricerca.toLowerCase()));
+        let container = document.getElementById('container')
+        container.innerHTML = ''
+        questionari.forEach(questionario => {
+            let div = document.createElement('div');
+            div.innerHTML = createSurvey(questionario);
+            container.append(div.firstElementChild)
+        })
+    }
+
+    function createSurvey(survey) {
+        return `
+                <li class="survey-item p-5 bg-white rounded-md shadow-md">
+                    <a>
+                        <div>
+                            <div class="justify-between sm:flex">
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-medium text-orange-600">${survey.titolo}</h3>
+                                    <p class="text-gray-500 mt-2 pr-2">${survey.descrizione}</p>
+                                </div>
+                                ${!survey.completato ? `
+                                <div class="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
+                                <span class="flex items-center text-gray-500">
+                                <a class="inline-block rounded border border-red-500 bg-red-500 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-500 focus:outline-none focus:ring active:text-red-400"
+                                href="index.php?action=compile&q=${survey.id}"
+                                > Compile </a>
+                                </span>
+                                </div>
+                                ` : `
+                                <div class="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
+                                <span class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ms-1 me-1.5 h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <p class="whitespace-nowrap text-sm">Completed</p>
+                                </span>
+                                </div>
+                                `}
+                            </div>
+                            <div class="mt-4 items-center space-y-4 text-sm sm:flex sm:space-x-4 sm:space-y-0">
+                                <span class="flex items-center text-gray-500">
+                                    <svg fill="#000000" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6,22H18a3,3,0,0,0,3-3V7a2,2,0,0,0-2-2H17V3a1,1,0,0,0-2,0V5H9V3A1,1,0,0,0,7,3V5H5A2,2,0,0,0,3,7V19A3,3,0,0,0,6,22ZM5,12.5a.5.5,0,0,1,.5-.5h13a.5.5,0,0,1,.5.5V19a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1Z"/>
+                                    </svg>
+                                    <span> ${survey.data} </span>
+                                </span>
+                                <span class="flex items-center text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="none">
+                                        <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span> ${survey.nome} ${survey.cognome} </span>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            `;
+    }
+</script>
 </body>
 </html>
