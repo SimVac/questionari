@@ -83,7 +83,7 @@
 </header>
 
 <section>
-    <form action="index.php" method="post">
+    <div action="index.php" method="post">
         <div class="flex flex-col justify-between">
             <section class="h-40 flex justify-center items-center ">
                 <div class="flex flex-col justify-evenly h-full">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="relative pl-4 pr-4 pb-4">
                         <label for="labels-range-input" class="sr-only">Labels range</label>
-                        <input id="labels-range-input" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <input id="question-<?= $j ?>" type="range" value="4" min="1" max="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                         <div class="w-full flex justify-between pt-4">
                             <?php for ($i=1; $i < 8; $i+=1): ?>
                                 <span class="text-sm text-gray-500 -bottom-6"> <?= $i ?> </span>
@@ -118,12 +118,34 @@
             </div>
             <?php endforeach; ?>
             <div class="p-6 w-full flex justify-center items-center">
-                <input type="submit" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500" value="Send!">
+                <button onclick="compileSurvey()" class="inline-block rounded border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">Send!</button>
             </div>
         </div>
-    </form>
+    </div>
 
 </section>
 
+<script>
+    function compileSurvey(){
+        let results = [];
+        for (let i = 1; i < <?= sizeof($domande)+1 ?>; i++){
+            results.push(document.getElementById(`question-${i}`).value)
+        }
+        let url_string = window.location.toString();
+        let url = new URL(url_string);
+        let id = url.searchParams.get("q");
+        let data = {
+            idQuestionario: id,
+            risposte: results
+        }
+        let form = new FormData();
+        form.append('compilazione-questionario', '');
+        form.append('risposte', JSON.stringify(data));
+        fetch('index.php', {
+            method: 'POST',
+            body: form
+        }).then(() => window.location.replace('index.php?action=surveys'))
+    }
+</script>
 </body>
 </html>

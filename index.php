@@ -113,6 +113,7 @@
                     ]);
                     exit(0);
                 }
+                $questionario = $questionario[0];
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
                 echo $template->render('compila', [
                     'questionario' => $questionario,
