@@ -41,7 +41,7 @@
 
                         <li>
                             <?php if(!$logged) : ?>
-                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" > Surveys </a>
                             <?php else: ?>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
                             <?php endif; ?>

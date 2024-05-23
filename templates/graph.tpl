@@ -148,14 +148,27 @@
         div.classList.add('pb-4')
         div.classList.add('h-fit')
         i+=1
-        console.log(questionario)
-        div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
+        console.log("numero " + questionario['numero_risposte'][0]['COUNT(*)'])
+        if (questionario['numero_risposte'][0]['COUNT(*)'] == 1){
+            div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
          <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
             ${questionario['nome'] + " " + questionario['cognome']}
         </p> <p class="max-w-xl text-gray-500 text-2xl">
             ${questionario['data']}
         </p>
+            <p class="max-w-xl text-gray-500 text-2xl"> 1 answer </p>
         <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
+        }else{
+            div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
+         <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['nome'] + " " + questionario['cognome']}
+        </p> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['data']}
+        </p>
+            <p class="max-w-xl text-gray-500 text-2xl"> ${questionario['numero_risposte'][0]['COUNT(*)']} answers </p>
+        <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
+        }
+
         console.log(div)
         elenco.append(div)
 
