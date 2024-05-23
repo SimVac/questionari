@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"> </script>
     <title>Survey</title>
 </head>
 <body>
@@ -40,12 +41,17 @@
                         </li>
 
                         <li>
+                            <?php if(!$logged) : ?>
+                            <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
+                            <?php else: ?>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
+                            <?php endif; ?>
                         </li>
 
                         <li>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
                         </li>
+
                         <li>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                         </li>
@@ -53,6 +59,26 @@
                 </nav>
 
                 <div class="flex items-center gap-4">
+
+                    <?php if (!$logged): ?>
+                    <div class="sm:flex sm:gap-4">
+                        <div class="hidden sm:flex">
+                            <a
+                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
+                                    href="index.php?action=login"
+                            >
+                                Login
+                            </a>
+                        </div>
+                        <a
+                                class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                                href="index.php?action=registrazione"
+                        >
+                            Register
+                        </a>
+                    </div>
+                    <?php else: ?>
+
                     <a href="index.php?action=profile">
                         <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +90,8 @@
                                   fill="#E5594F"/>
                         </svg>
                     </a>
+
+                    <?php endif; ?>
 
                     <div class="block md:hidden">
                         <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
@@ -84,5 +112,149 @@
         </div>
     </div>
 </header>
+
+<section class="h-52 flex justify-center items-center ">
+    <div class="flex flex-col justify-evenly h-full">
+        <h1 class="text-center text-6xl font-bold text-orange-500">Graphs!</h1>
+        <p class="mx-auto max-w-3xl text-center text-gray-500 text-2xl">
+            Hello admin! Here you can see the average answer for each question
+        </p>
+    </div>
+</section>
+
+
+<div class="flex flex-col justify-evenly items-center" id="grafici">
+</div>
+
 </body>
+
+
+<script>
+
+    let questionari = JSON.parse('<?php echo json_encode($questionari) ?>')
+    console.log(questionari)
+    console.log(questionari)
+    elenco = document.getElementById("grafici")
+
+    const chart = [];
+    let i = 0;
+
+    questionari.forEach((questionario) => {
+
+        let div = document.createElement('div')
+        // div.setAttribute(id, i)
+        // i+=1
+        div.classList.add(`grafico-${i}`)
+        div.classList.add('pb-4')
+        div.classList.add('h-fit')
+        i+=1
+        console.log("numero " + questionario['numero_risposte'][0]['COUNT(*)'])
+        if (questionario['numero_risposte'][0]['COUNT(*)'] == 1){
+            div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
+         <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['nome'] + " " + questionario['cognome']}
+        </p> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['data']}
+        </p>
+            <p class="max-w-xl text-gray-500 text-2xl"> 1 answer </p>
+        <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
+        }else{
+            div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
+         <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['nome'] + " " + questionario['cognome']}
+        </p> <p class="max-w-xl text-gray-500 text-2xl">
+            ${questionario['data']}
+        </p>
+            <p class="max-w-xl text-gray-500 text-2xl"> ${questionario['numero_risposte'][0]['COUNT(*)']} answers </p>
+        <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
+        }
+
+        console.log(div)
+        elenco.append(div)
+
+        var options = {
+            series: [{
+                name: '',
+                data: []
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                width: 700
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: [],
+            },
+            yaxis: {
+                title: {
+                    text: 'vote'
+                },
+                max: 7
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                    custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                        console.log(dataPointIndex)
+                        datas = questionario['domande'][dataPointIndex]['testo']
+                        return '<div class="custom-tooltip">' + '<span>' +  datas + '</span>' + '<br>' +
+                            '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
+                            '</div>';
+                    }
+            },
+            colors: ['#3b82f6'],
+        };
+
+        for (let i = 1; i <= questionario['domande'].length; i++) {
+            options.xaxis.categories.push(i)
+        }
+
+        console.log((options.series[0]['data']))
+
+        questionario['domande'].forEach((element) => {
+            options.series[0]['data'].push(element['media'])
+        })
+        chart.push(options)
+    })
+
+
+    console.log(chart)
+
+    i = 0
+    chart.forEach((value) => {
+        console.log(value)
+        console.log(`grafico-${i}`)
+        console.log(document.querySelector(`.grafico-${i}`))
+        let gra = new ApexCharts(document.querySelector(`.grafico-${i}`), value)
+        i += 1
+        gra.render()
+    })
+
+</script>
+
+<style>
+    .custom-tooltip {
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+
 </html>

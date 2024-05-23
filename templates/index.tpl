@@ -11,7 +11,7 @@
 <body>
 
 <div class="flex flex-col h-screen">
-    <header class="bg-orange-500">
+    <header class="bg-orange-500 h-fit">
         <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 justify-between">
             <div class="flex flex w-1/4 justify-between items-center">
                 <a class="block text-teal-600" href="index.php">
@@ -42,12 +42,17 @@
                             </li>
 
                             <li>
+                                <?php if(!$logged) : ?>
+                                <a class="text-white transition hover:text-gray-500/75" href="index.php?action=login" onclick="(() => localStorage['page'] = 'surveys')()"> Surveys </a>
+                                <?php else: ?>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
+                                <?php endif; ?>
                             </li>
 
                             <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
                             </li>
+
                             <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
                             </li>
@@ -55,6 +60,24 @@
                     </nav>
 
                     <div class="flex items-center gap-4">
+                        <?php if (!$logged): ?>
+                        <div class="sm:flex sm:gap-4">
+                            <div class="hidden sm:flex">
+                                <a
+                                        class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
+                                        href="index.php?action=login"
+                                >
+                                    Login
+                                </a>
+                            </div>
+                            <a
+                                    class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                                    href="index.php?action=registrazione"
+                            >
+                                Register
+                            </a>
+                        </div>
+                        <?php else: ?>
                         <a href="index.php?action=profile">
                             <svg width="2.5rem" height="2.5rem" viewBox="0 0 1024 1024" class="icon" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +89,7 @@
                                       fill="#E5594F"/>
                             </svg>
                         </a>
-
+                        <?php endif; ?>
                         <div class="block md:hidden">
                             <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                                 <svg
@@ -92,7 +115,7 @@
             <div class="flex flex-row justify-around h-96 w-11/12 items-center">
                 <div class="flex flex-col justify-around h-60 items-start">
                     <h1 class="text-4xl font-bold text-orange-500 sm:text-4xl">Why should I use QuestionAPP?</h1>
-                    <p class="text-gray-700 text-lg max-w-md">
+                    <p class="text-gray-500 text-lg max-w-md">
                         Shape the future of products and services you love. Share your voice with QuestionAPP and participate in impactful surveys.
                     </p>
                     <a
@@ -117,7 +140,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Need a help in QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">Don't worry it's really easy and intuitive, you won't have any problems :)</p>
+                    <p class="mb-3 font-normal text-gray-700">Don't worry! It's really easy and intuitive. You won't have any problems :)</p>
                 </div>
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -126,7 +149,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Why QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">Because our website has a modern layout and it's users friendly</p>
+                    <p class="mb-3 font-normal text-gray-700">Our website has a modern layout and is user-friendly.</p>
                 </div>
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -135,7 +158,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Contact us</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">If you need any help you can contact us in the about page, we will answer ASAP</p>
+                    <p class="mb-3 font-normal text-gray-700">If you need any help, you can contact us <a href="index.php?action=about" class="text-gray-800 underline"> here</a>. We will answer as soon as possible</p>
                 </div>
             </div>
         </div>
