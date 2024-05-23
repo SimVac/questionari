@@ -134,7 +134,7 @@
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
                 $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
             }
-            var_dump($questionari);
+            //var_dump($questionari);
             echo $template->render('graph',[
                 'logged'=>isset($_SESSION['user']),
                 'questionari' => $questionari
