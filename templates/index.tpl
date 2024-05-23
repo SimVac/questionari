@@ -115,7 +115,7 @@
             <div class="flex flex-row justify-around h-96 w-11/12 items-center">
                 <div class="flex flex-col justify-around h-60 items-start">
                     <h1 class="text-4xl font-bold text-orange-500 sm:text-4xl">Why should I use QuestionAPP?</h1>
-                    <p class="text-gray-700 text-lg max-w-md">
+                    <p class="text-gray-500 text-lg max-w-md">
                         Shape the future of products and services you love. Share your voice with QuestionAPP and participate in impactful surveys.
                     </p>
                     <a
@@ -140,7 +140,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Need a help in QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">Don't worry it's really easy and intuitive, you won't have any problems :)</p>
+                    <p class="mb-3 font-normal text-gray-700">Don't worry! It's really easy and intuitive. You won't have any problems :)</p>
                 </div>
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -149,7 +149,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Why QuestionAPP?</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">Because our website has a modern layout and it's users friendly</p>
+                    <p class="mb-3 font-normal text-gray-700">Our website has a modern layout and is user-friendly.</p>
                 </div>
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <svg class="w-7 h-7 text-red-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -158,7 +158,7 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-orange-600">Contact us</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700">If you need any help you can contact us in the about page, we will answer ASAP</p>
+                    <p class="mb-3 font-normal text-gray-700">If you need any help, you can contact us <a href="index.php?action=about" class="text-gray-800 underline"> here</a>. We will answer as soon as possible</p>
                 </div>
             </div>
         </div>
