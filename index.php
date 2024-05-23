@@ -12,8 +12,10 @@
     use Model\DomandaRepository;
     use Util\Email;
 
-    function page_refresh(){
-        echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php\'>';
+
+    //200 righe di puro terrore, se sto commento e' ancora qui vuol dire che non abbiamo fatto il refactoring
+    function page_refresh($location=''){
+        echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php'. $location .'\'>';
     }
 
     $template = new League\Plates\Engine('templates', 'tpl');
@@ -132,6 +134,10 @@
             foreach ($questionari as &$questionario) {
                 $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
                 $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+                if (sizeof($questionario['domande']) <= 0)
+                    foreach ($domande as $domanda){
+                        $questionario['domande'][] = ['media'=>0, 'testo'=>$domanda['testo']];
+                    }
                 $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
             }
             //var_dump($questionari);
@@ -142,27 +148,24 @@
             exit(0);
         }
         if($_GET['action'] == 'public'){
-            $questionari = QuestionarioRepository::getQuestionari();
-            foreach ($questionari as &$questionario) {
-                $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
-                $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
-                $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
-            }
-
-            $n = $_GET['q'] - 1;
+            $questionario = QuestionarioRepository::getQuestionarioById($_GET['q'])[0];
+            $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
+            $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+            $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
 
             $mail = new Email($email_config);
 
-            $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionari[$n]['titolo'] . '</h1>
-                        <p>Hey ' . $questionari[$n]['nome'] . ' ' . $questionari[$n]['cognome'] . ' has just shared the average results of his survey.
-                        Check theme out: </p>';
-            for ($i = 0; $i < sizeof($questionari[$n]['domande']); $i++){
-                $content .= '<p><strong>' . $questionari[$n]['domande'][$i]['testo'] . '</strong> ' . $questionari[$n]['domande'][$i]['media'] . '/7</p>';
+            $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1>
+                        <p>Hey ' . $questionario['nome'] . ' ' . $questionario['cognome'] . ' has just shared the average results of his survey.
+                        Check them out: </p>';
+            for ($i = 0; $i < sizeof($questionario['domande']); $i++){
+                $content .= '<p><strong>' . $questionario['domande'][$i]['testo'] . '</strong> ' . $questionario['domande'][$i]['media'] . '/7</p>';
             }
-            $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionari[$n]['titolo'], $content);
+            $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
 
             //var_dump($questionari);
-            header('Location: '. 'http://localhost/index.php?action=graphs');
+            page_refresh('?action=graphs');
+            exit(0);
         }
     }
     if (isset($_POST['modifica-bio'])){
@@ -192,7 +195,6 @@
     if (isset($_POST['compilazione-questionario'])){
         $risposte = json_decode($_POST['risposte']);
         $prima_domanda = DomandaRepository::getDomandeByQuestionarioId($risposte->idQuestionario)[0];
-        //hell nah
         if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
             exit(0);
         CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);

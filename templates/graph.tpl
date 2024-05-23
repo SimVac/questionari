@@ -148,13 +148,14 @@
         div.classList.add('pb-4')
         div.classList.add('h-fit')
         i+=1
-        div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario[1]} </h1>
+        console.log(questionario)
+        div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
          <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
-            ${questionario[5] + " " + questionario[6]}
+            ${questionario['nome'] + " " + questionario['cognome']}
         </p> <p class="max-w-xl text-gray-500 text-2xl">
             ${questionario['data']}
         </p>
-        <a href="index.php?action=public&q=${i}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
+        <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
         console.log(div)
         elenco.append(div)
 
@@ -198,7 +199,7 @@
             tooltip: {
                     custom: function({ series, seriesIndex, dataPointIndex, w }) {
                         console.log(dataPointIndex)
-                        datas = questionario['domande'][dataPointIndex][1]
+                        datas = questionario['domande'][dataPointIndex]['testo']
                         return '<div class="custom-tooltip">' + '<span>' +  datas + '</span>' + '<br>' +
                             '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
                             '</div>';
@@ -214,7 +215,7 @@
         console.log((options.series[0]['data']))
 
         questionario['domande'].forEach((element) => {
-            options.series[0]['data'].push(element[0])
+            options.series[0]['data'].push(element['media'])
         })
         chart.push(options)
     })
