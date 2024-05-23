@@ -141,6 +141,29 @@
             ]);
             exit(0);
         }
+        if($_GET['action'] == 'public'){
+            $questionari = QuestionarioRepository::getQuestionari();
+            foreach ($questionari as &$questionario) {
+                $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
+                $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+                $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
+            }
+
+            $n = $_GET['q'] - 1;
+
+            $mail = new Email($email_config);
+
+            $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionari[$n]['titolo'] . '</h1>
+                        <p>Hey ' . $questionari[$n]['nome'] . ' ' . $questionari[$n]['cognome'] . ' has just shared the average results of his survey.
+                        Check theme out: </p>';
+            for ($i = 0; $i < sizeof($questionari[$n]['domande']); $i++){
+                $content .= '<p><strong>' . $questionari[$n]['domande'][$i]['testo'] . '</strong> ' . $questionari[$n]['domande'][$i]['media'] . '/7</p>';
+            }
+            $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionari[$n]['titolo'], $content);
+
+            //var_dump($questionari);
+            header('Location: '. 'http://localhost/index.php?action=graphs');
+        }
     }
     if (isset($_POST['modifica-bio'])){
         UtenteRepository::editBio($_POST['bio'], $_SESSION['user']['id']);
