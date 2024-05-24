@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"> </script>
-    <title>Survey</title>
+    <title>QuestionAPP</title>
 </head>
 <body>
 <header class="bg-orange-500">
@@ -48,9 +48,11 @@
                             <?php endif; ?>
                         </li>
 
+                        <?php if ($admin): ?>
                         <li>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
                         </li>
+                        <?php endif; ?>
 
                         <li>
                             <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>

@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Survey</title>
+    <title>QuestionAPP</title>
 </head>
 <body>
 <div>
@@ -44,9 +44,11 @@
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=surveys"> Surveys </a>
                             </li>
 
+                            <?php if ($admin): ?>
                             <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=graphs"> Graphs </a>
                             </li>
+                            <?php endif; ?>
 
                             <li>
                                 <a class="text-white transition hover:text-gray-500/75" href="index.php?action=about"> Contact us </a>
@@ -140,7 +142,7 @@
             </div>
         <?php endif; ?>
 
-        <div class="mt-8 pt-4">
+        <div class="mt-8">
             <div>
                 <section class=" max-w-screen-lg mx-auto px-4 md:px-8">
                     <ul id="container" class="space-y-6">
