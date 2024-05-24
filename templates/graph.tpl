@@ -132,8 +132,8 @@
 <script>
 
     let questionari = JSON.parse('<?php echo json_encode($questionari) ?>')
-    console.log(questionari)
-    console.log(questionari)
+    // console.log(questionari)
+    // console.log(questionari)
     elenco = document.getElementById("grafici")
 
     const chart = [];
@@ -148,7 +148,8 @@
         div.classList.add('pb-4')
         div.classList.add('h-fit')
         i+=1
-        console.log("numero " + questionario['numero_risposte'][0]['COUNT(*)'])
+        //vacca ha dimenticato di rinominare la variabile in sql
+        // console.log("numero " + questionario['numero_risposte'][0]['COUNT(*)'])
         if (questionario['numero_risposte'][0]['COUNT(*)'] == 1){
             div.innerHTML = `<div class="flex flex-col items-start w-full"> <h1 class="text-center text-3xl font-bold text-orange-500"> ${questionario['titolo']} </h1>
          <div class="flex w-full justify-between"> <p class="max-w-xl text-gray-500 text-2xl">
@@ -169,7 +170,7 @@
         <a href="index.php?action=public&q=${questionario['id']}" class="text-indigo-600 text-xl"> Share </a> </div>  </div> `
         }
 
-        console.log(div)
+        // console.log(div)
         elenco.append(div)
 
         var options = {
@@ -211,7 +212,7 @@
             },
             tooltip: {
                     custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                        console.log(dataPointIndex)
+                        // console.log(dataPointIndex)
                         datas = questionario['domande'][dataPointIndex]['testo']
                         return '<div class="custom-tooltip">' + '<span>' +  datas + '</span>' + '<br>' +
                             '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
@@ -225,7 +226,7 @@
             options.xaxis.categories.push(i)
         }
 
-        console.log((options.series[0]['data']))
+        // console.log((options.series[0]['data']))
 
         questionario['domande'].forEach((element) => {
             options.series[0]['data'].push(element['media'])
@@ -234,13 +235,13 @@
     })
 
 
-    console.log(chart)
+    // console.log(chart)
 
     i = 0
     chart.forEach((value) => {
-        console.log(value)
-        console.log(`grafico-${i}`)
-        console.log(document.querySelector(`.grafico-${i}`))
+        // console.log(value)
+        // console.log(`grafico-${i}`)
+        // console.log(document.querySelector(`.grafico-${i}`))
         let gra = new ApexCharts(document.querySelector(`.grafico-${i}`), value)
         i += 1
         gra.render()

@@ -196,7 +196,7 @@
         let birthday = document.getElementById('birthday');
         birthday.outerHTML = `<input id='birthday' type='date' value='${birthday.textContent.split(' ')[1]}'>`;
         let city = document.getElementById('city');
-        city.outerHTML = `<input id='city' type='text' value='${city.textContent.split(' ')[1]}'>`
+        city.outerHTML = `<input id='city' type='text' placeholder="City" value='${city.textContent.split(' ')[1]}'>`
 
         let button = document.getElementById('btnEdit')
         button.onclick = sendData;

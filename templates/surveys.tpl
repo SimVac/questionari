@@ -140,7 +140,7 @@
             </div>
         <?php endif; ?>
 
-        <div class="mt-4">
+        <div class="mt-8 pt-4">
             <div>
                 <section class=" max-w-screen-lg mx-auto px-4 md:px-8">
                     <ul id="container" class="space-y-6">

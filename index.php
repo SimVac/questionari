@@ -44,7 +44,6 @@
         }
     }
 
-
     // POST section
     if (isset($_POST['registrazione'])){
         $mail = $_POST['mail'];
@@ -60,20 +59,19 @@
             exit(0);
         }
         $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
-
         $email = new Email($email_config);
         $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
 
         page_refresh();
         exit(0);
     }
-
     if ($user == null){
         echo $template->render('index', [
             'logged'=>false
         ]);
         exit(0);
     }
+
 
     if (isset($_GET['action'])){
         if ($_GET['action'] == 'surveys'){
@@ -148,6 +146,13 @@
             exit(0);
         }
         if($_GET['action'] == 'public'){
+            if ($_SESSION['user']['ruolo'] != 'admin') {
+                header('HTTP/1.0 403 Forbidden');
+                echo $template->render('error', [
+                    'logged' => isset($_SESSION['user'])
+                ]);
+                exit(0);
+            }
             $questionario = QuestionarioRepository::getQuestionarioById($_GET['q'])[0];
             $questionario['domande'] = QuestionarioRepository::getMediaRisultati($questionario['id']);
             $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
@@ -161,7 +166,11 @@
             for ($i = 0; $i < sizeof($questionario['domande']); $i++){
                 $content .= '<p><strong>' . $questionario['domande'][$i]['testo'] . '</strong> ' . $questionario['domande'][$i]['media'] . '/7</p>';
             }
-            $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+            $users = UtenteRepository::getUtentiCompilato($questionario['id']);
+            foreach ($users as $user) {
+                $mail = new Email($email_config);
+                $mail->sendEmail($user['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+            }
 
             //var_dump($questionari);
             page_refresh('?action=graphs');
@@ -178,7 +187,9 @@
     if (isset($_POST['aggiunta-questionario'])){
         if ($_SESSION['user']['ruolo'] != 'admin') {
             header('HTTP/1.0 403 Forbidden');
-            echo 'You are forbidden!';
+            echo $template->render('error', [
+                'logged' => isset($_SESSION['user'])
+            ]);
             exit(0);
         }
         $questionario = json_decode($_POST['questionario']);
@@ -212,7 +223,6 @@
         $content .= '</div>';
         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
     }
-
     echo $template->render('index', [
         'logged'=>isset($_SESSION['user'])
     ]);

@@ -44,7 +44,7 @@ class UtenteRepository{
 
     public static function getUtenteById(int $id){
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM utente WHERE id = :id';
+        $sql = 'SELECT utente.*, ruolo.ruolo FROM utente INNER JOIN ruolo ON ruolo.id = utente.idRuolo WHERE utente.id = :id';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'id' => $id
@@ -62,6 +62,16 @@ class UtenteRepository{
         ]);
         $stmt->fetchAll();
         $_SESSION['user'] = self::getUtenteById($_SESSION['user']['id']);
+    }
+
+    public static function getUtentiCompilato($idQuestionario){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT utente.* FROM utente INNER JOIN compila ON utente.id = compila.idUtente INNER JOIN domanda ON domanda.id = compila.idDomanda WHERE domanda.idQuestionario = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $idQuestionario
+        ]);
+        return $stmt->fetchAll();
     }
 
     public static function editData(string $gender, string $birthday, string $city, int $idUtente){
