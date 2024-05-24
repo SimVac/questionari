@@ -31,7 +31,7 @@ CREATE TABLE `compila` (
   KEY `compila_domanda_id_fk` (`idDomanda`),
   KEY `compila_utente_id_fk` (`idUtente`),
   CONSTRAINT `compila_domanda_id_fk` FOREIGN KEY (`idDomanda`) REFERENCES `domanda` (`id`),
-  CONSTRAINT `compila_utente_id_fk` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`)
+  CONSTRAINT `compila_utente_id_fk` FOREIGN KEY (`idUtente`) REFERENCES `q_utente` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,7 +88,7 @@ CREATE TABLE `questionario` (
   `idAutore` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `questionario_utente_id_fk` (`idAutore`),
-  CONSTRAINT `questionario_utente_id_fk` FOREIGN KEY (`idAutore`) REFERENCES `utente` (`id`)
+  CONSTRAINT `questionario_utente_id_fk` FOREIGN KEY (`idAutore`) REFERENCES `q_utente` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,7 +109,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `ruolo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ruolo` (
+CREATE TABLE `q_ruolo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ruolo` text NOT NULL,
   PRIMARY KEY (`id`)
@@ -120,10 +120,10 @@ CREATE TABLE `ruolo` (
 -- Dumping data for table `ruolo`
 --
 
-LOCK TABLES `ruolo` WRITE;
-/*!40000 ALTER TABLE `ruolo` DISABLE KEYS */;
-INSERT INTO `ruolo` VALUES (1,'admin'),(2,'user');
-/*!40000 ALTER TABLE `ruolo` ENABLE KEYS */;
+LOCK TABLES `q_ruolo` WRITE;
+/*!40000 ALTER TABLE `q_ruolo` DISABLE KEYS */;
+INSERT INTO `q_ruolo` VALUES (1,'admin'),(2,'user');
+/*!40000 ALTER TABLE `q_ruolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -133,7 +133,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `utente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `utente` (
+CREATE TABLE `q_utente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail` varchar(64) NOT NULL,
   `password` text NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `utente` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `utente_pk` (`mail`),
   KEY `utente_ruolo_id_fk` (`idRuolo`),
-  CONSTRAINT `utente_ruolo_id_fk` FOREIGN KEY (`idRuolo`) REFERENCES `ruolo` (`id`)
+  CONSTRAINT `utente_ruolo_id_fk` FOREIGN KEY (`idRuolo`) REFERENCES `q_ruolo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -156,10 +156,10 @@ CREATE TABLE `utente` (
 -- Dumping data for table `utente`
 --
 
-LOCK TABLES `utente` WRITE;
-/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'pangiorgio.x@gmail.com','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'Simone','Vacca','2024-05-21','2024-05-21','Male','Brescia','I like femboys'),(5,'andrea.scarsato@gmail.com','$2y$10$VS3SI7DDtV/dRMU8xeCH0.NL/I3fNpJYh8HHAokbv0KO8bmZY0FIW',1,'Andrea','Scarsato','2024-05-23','2005-08-06','Male','Brescia','Football (the real one not the american version) enjoyer');
-/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
+LOCK TABLES `q_utente` WRITE;
+/*!40000 ALTER TABLE `q_utente` DISABLE KEYS */;
+INSERT INTO `q_utente` VALUES (1,'pangiorgio.x@gmail.com','$2y$10$dsDWvT7dYu2LnoJupf8CROeZa2eLN4haWTfIfz3D/fLmTnxmPkte6',1,'Simone','Vacca','2024-05-21','2024-05-21','Male','Brescia','I like femboys'),(5,'andrea.scarsato@gmail.com','$2y$10$VS3SI7DDtV/dRMU8xeCH0.NL/I3fNpJYh8HHAokbv0KO8bmZY0FIW',1,'Andrea','Scarsato','2024-05-23','2005-08-06','Male','Brescia','Football (the real one not the american version) enjoyer');
+/*!40000 ALTER TABLE `q_utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
