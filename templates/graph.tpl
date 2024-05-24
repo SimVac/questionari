@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"> </script>
-    <title>Survey</title>
+    <title>QuestionAPP</title>
 </head>
 <body>
 <header class="bg-orange-500">
