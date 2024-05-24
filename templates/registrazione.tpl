@@ -27,7 +27,7 @@
                 </h2>
 
                 <p class="mt-4 leading-relaxed text-white/90">
-                    If you want to ask somthing to someone you are in
+                    If you want to ask something to someone you are in
                     the right place. Sign up now for free and start creat and fill out survey
                 </p>
             </div>
