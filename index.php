@@ -64,8 +64,11 @@
              exit(0);
          }
          $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
-         $email = new Email($email_config);
-         $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+         try{
+             $email = new Email($email_config);
+             $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+         }catch (Exception $e){
+         }
 
          page_refresh();
          exit(0);
@@ -180,8 +183,6 @@
              $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
              $questionario['numero_risposte'] = CompilaRepository::getNumeroRisposte($domande[0]['id']);
 
-             $mail = new Email($email_config);
-
              $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1>
                         <p>Hey ' . $questionario['nome'] . ' ' . $questionario['cognome'] . ' has just shared the average results of his survey.
                         Check them out: </p>';
@@ -190,8 +191,11 @@
              }
              $users = UtenteRepository::getUtentiCompilato($questionario['id']);
              foreach ($users as $user) {
-                 $mail = new Email($email_config);
-                 $mail->sendEmail($user['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+                 try{
+                     $mail = new Email($email_config);
+                     $mail->sendEmail($user['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+                 }catch (Exception $e){
+                 }
              }
 
              //var_dump($questionari);
@@ -221,8 +225,11 @@
          // manda mail a tutti
          $users = UtenteRepository::listAll();
          foreach ($users as $user) {
-             $mail = new Email($email_config);
-             $mail->sendEmail($user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
+             try{
+                 $mail = new Email($email_config);
+                 $mail->sendEmail($user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
+             }catch (Exception $e){
+             }
          }
      }
 
@@ -232,19 +239,22 @@
          if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
              exit(0);
          CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
-         $mail = new Email($email_config);
-         $questionario = QuestionarioRepository::getQuestionarioById($risposte->idQuestionario)[0];
-         $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
-         $risposte = [];
-         foreach ($domande as $domanda) {
-             $risposte[] = CompilaRepository::getRispostaByIdDomanda($domanda['id'], $_SESSION['user']['id'])[0];
+         try{
+             $mail = new Email($email_config);
+             $questionario = QuestionarioRepository::getQuestionarioById($risposte->idQuestionario)[0];
+             $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+             $risposte = [];
+             foreach ($domande as $domanda) {
+                 $risposte[] = CompilaRepository::getRispostaByIdDomanda($domanda['id'], $_SESSION['user']['id'])[0];
+             }
+             $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1><p>Thank you for filling out the survey. Here are the answers received.</p>';
+             for ($i = 0; $i < sizeof($domande); $i++) {
+                 $content .= '<p><strong>' . $domande[$i]['testo'] . '</strong> ' . $risposte[$i]['risposta'] . '/7</p>';
+             }
+             $content .= '</div>';
+             $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+         }catch (Exception $e){
          }
-         $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1><p>Thank you for filling out the survey. Here are the answers received.</p>';
-         for ($i = 0; $i < sizeof($domande); $i++) {
-             $content .= '<p><strong>' . $domande[$i]['testo'] . '</strong> ' . $risposte[$i]['risposta'] . '/7</p>';
-         }
-         $content .= '</div>';
-         $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
      }
      echo $template->render('index', [
          'logged' => isset($_SESSION['user']),
