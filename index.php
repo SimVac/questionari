@@ -11,13 +11,12 @@
     use Model\CompilaRepository;
     use Model\DomandaRepository;
     use Util\Email;
+    use Util\EmailSender;
 
 
-    //200 righe di puro terrore, se sto commento e' ancora qui vuol dire che non abbiamo fatto il refactoring
     function page_refresh($location=''){
         echo '<meta http-equiv=\'refresh\' content=\'0;url=index.php'. $location .'\'>';
     }
- try {
      $template = new League\Plates\Engine('templates', 'tpl');
 
      $user = Authenticator::getUser();
@@ -66,7 +65,9 @@
          $_SESSION['user'] = UtenteRepository::userAuthentication($mail, $password);
          try{
              $email = new Email($email_config);
-             $email->sendEmail($mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+             $worker = Amp\Parallel\Worker\createWorker();
+             $emailSender = new EmailSender($email, $mail, 'QuestionAPP registration', 'Thank you for the registration to QuestionAPP');
+             $execution = $worker->submit($emailSender);
          }catch (Exception $e){
          }
 
@@ -192,8 +193,10 @@
              $users = UtenteRepository::getUtentiCompilato($questionario['id']);
              foreach ($users as $user) {
                  try{
-                     $mail = new Email($email_config);
-                     $mail->sendEmail($user['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+                     $email = new Email($email_config);
+                     $worker = Amp\Parallel\Worker\createWorker();
+                     $emailSender = new EmailSender($email, $user['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+                     $execution = $worker->submit($emailSender);
                  }catch (Exception $e){
                  }
              }
@@ -226,8 +229,10 @@
          $users = UtenteRepository::listAll();
          foreach ($users as $user) {
              try{
-                 $mail = new Email($email_config);
-                 $mail->sendEmail($user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
+                 $email = new Email($email_config);
+                 $worker = Amp\Parallel\Worker\createWorker();
+                 $emailSender = new EmailSender($email, $user['mail'], 'New Survey!', '<h1>' . $questionario->titolo . '</h1><h3>' . $questionario->descrizione . '</h3>');
+                 $execution = $worker->submit($emailSender);
              }catch (Exception $e){
              }
          }
@@ -239,20 +244,22 @@
          if (sizeof(CompilaRepository::getRispostaByIdDomanda($prima_domanda['id'], $_SESSION['user']['id'])))
              exit(0);
          CompilaRepository::addRisultati($risposte->risposte, $_SESSION['user']['id'], $risposte->idQuestionario);
+         $questionario = QuestionarioRepository::getQuestionarioById($risposte->idQuestionario)[0];
+         $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
+         $risposte = [];
+         foreach ($domande as $domanda) {
+             $risposte[] = CompilaRepository::getRispostaByIdDomanda($domanda['id'], $_SESSION['user']['id'])[0];
+         }
+         $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1><p>Thank you for filling out the survey. Here are the answers received.</p>';
+         for ($i = 0; $i < sizeof($domande); $i++) {
+             $content .= '<p><strong>' . $domande[$i]['testo'] . '</strong> ' . $risposte[$i]['risposta'] . '/7</p>';
+         }
+         $content .= '</div>';
          try{
-             $mail = new Email($email_config);
-             $questionario = QuestionarioRepository::getQuestionarioById($risposte->idQuestionario)[0];
-             $domande = DomandaRepository::getDomandeByQuestionarioId($questionario['id']);
-             $risposte = [];
-             foreach ($domande as $domanda) {
-                 $risposte[] = CompilaRepository::getRispostaByIdDomanda($domanda['id'], $_SESSION['user']['id'])[0];
-             }
-             $content = '<div style="display: grid; justify-content: center;"><h1>' . $questionario['titolo'] . '</h1><p>Thank you for filling out the survey. Here are the answers received.</p>';
-             for ($i = 0; $i < sizeof($domande); $i++) {
-                 $content .= '<p><strong>' . $domande[$i]['testo'] . '</strong> ' . $risposte[$i]['risposta'] . '/7</p>';
-             }
-             $content .= '</div>';
-             $mail->sendEmail($_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+             $email = new Email($email_config);
+             $worker = Amp\Parallel\Worker\createWorker();
+             $emailSender = new EmailSender($email, $_SESSION['user']['mail'], 'New survey filled out - ' . $questionario['titolo'], $content);
+             $execution = $worker->submit($emailSender);
          }catch (Exception $e){
          }
      }
@@ -260,10 +267,4 @@
          'logged' => isset($_SESSION['user']),
          'admin' => $_SESSION['user']['ruolo'] == 'admin'
      ]);
- }catch (Exception $e){
-     echo $template->render('error', [
-         'logged' => isset($_SESSION['user']),
-         'admin' => isset($_SESSION['user']) && $_SESSION['user']['ruolo'] == 'admin'
-     ]);
- }
 
